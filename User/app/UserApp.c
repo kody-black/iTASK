@@ -1,4 +1,4 @@
-﻿/**************************************************************************************
+/**************************************************************************************
 * 因为emWin显示只支持UTF-8编码格式的中文，如果希望直接显示在Keil直接输入的中文，      *
 *            比如使用：GUI_DispStringHCenterAt("流水灯",110,120);                     *
 * 该文件必须以UTF-8编码格式，不然中文无法正常显示。                                   *
@@ -48,6 +48,42 @@
 // USER START (Optionally insert additional includes)
 #include "includes.h"
 #include  "app.h"
+
+static  KEY Key1,Key2;
+
+
+uint32_t time = 0;
+char str[20];
+uint16_t  key_flag=0;
+extern mk;
+char dispBuff[100];
+#define SNAKE_Max_Long 60//蛇的最大长度
+static void Delay ( __IO uint32_t nCount );
+//蛇结构体
+struct Snake
+{
+	uint16_t X[SNAKE_Max_Long];
+	uint16_t Y[SNAKE_Max_Long];
+	u8 Long;//蛇的长度
+	u8 Life;//蛇的生命，0表示或者，1表示死亡
+	u8 Direction;//蛇移动的方向
+}snake;
+
+//食物结构体
+struct Food
+{
+	u8 X;//食物横坐标
+	u8 Y;//事物纵坐标
+	u8 Yes;//判断是否需要出现食物，0表示已有，1表示需要
+}food;
+
+//游戏等级分数
+struct Game
+{
+	u16 Score;//分数
+	u8 Life;//游戏等级	
+}game;
+
 // USER END
 
 /*********************************************************************
@@ -74,7 +110,8 @@
 *       _aDialogCreate
 */
 static const GUI_WIDGET_CREATE_INFO _aDialogCreateUSER[] = {
-  { FRAMEWIN_CreateIndirect, "UserApp", 0, 0, 0, 240, 320, 0, 0x64, 0 },
+  { FRAMEWIN_CreateIndirect, "Snake", 0, 0, 0, 240, 320, 0, 0x64, 0 },
+  { BUTTON_CreateIndirect, "Start", GUI_ID_BUTTON0, 118-60, 240, 120, 40, 0, 0x0, 0},
   // USER START (Optionally insert additional widgets)
   // USER END
 };
@@ -95,41 +132,76 @@ static const GUI_WIDGET_CREATE_INFO _aDialogCreateUSER[] = {
 *       _cbDialog
 */
 static void _cbDialogUSER(WM_MESSAGE * pMsg) {
-  WM_HWIN hItem;
-  // USER START (Optionally insert additional variables)
-  // USER END
-  switch (pMsg->MsgId) {
-	  case WM_DELETE:
-			OS_INFO("USERapp delete\n");
+  	WM_HWIN hItem;
+  	int Id;
+	int NCode;
+  	// USER START (Optionally insert additional variables)
+  	// USER END
+  	switch (pMsg->MsgId) {
+	  	case WM_DELETE:
+			OS_INFO("Snake delete\n");
 			Flag_ICON110 = 0;
 			UserApp_Flag = 0;
 			tpad_flag=0;
-		  break;
-	  case WM_INIT_DIALOG:
-		//
-		// Initialization of 'LED TEST'
-		//
-	  hItem = pMsg->hWin;
-    FRAMEWIN_SetTextColor(hItem,GUI_DARKGRAY);
-    FRAMEWIN_SetFont(hItem, GUI_FONT_16B_ASCII);
-    FRAMEWIN_SetTextAlign(hItem, GUI_TA_LEFT | GUI_TA_VCENTER);
-		FRAMEWIN_AddCloseButton(hItem,FRAMEWIN_BUTTON_RIGHT,0);
-    FRAMEWIN_SetTitleHeight(hItem, 20);
-		// USER START (Optionally insert additional code for further widget initialization)
-		// USER END
-		break;
-	  // USER START (Optionally insert additional message handling)
+		  	break;
+	  	case WM_INIT_DIALOG:
+			//
+			// Initialization of 'LED TEST'
+			//
+			hItem = pMsg->hWin;
+			FRAMEWIN_SetTextColor(hItem,GUI_DARKGRAY);
+			FRAMEWIN_SetFont(hItem, GUI_FONT_16B_ASCII);
+			FRAMEWIN_SetTextAlign(hItem, GUI_TA_LEFT | GUI_TA_VCENTER);
+			FRAMEWIN_AddCloseButton(hItem,FRAMEWIN_BUTTON_RIGHT,0);
+			FRAMEWIN_SetTitleHeight(hItem, 20);
+			// USER START (Optionally insert additional code for further widget initialization)
+			// USER END
+			//开始按钮文本设置
+			hItem = WM_GetDialogItem(pMsg->hWin, GUI_ID_BUTTON0);
+			BUTTON_SetText(hItem, "开始游戏");
+			BUTTON_SetFont(hItem, &XBF_Font);
+			// USER START (Optionally insert additional message handling)
+			break;
+		
+		case WM_NOTIFY_PARENT:
+			Id = WM_GetId(pMsg->hWinSrc);
+			NCode = pMsg->Data.v;
+			switch(Id){
+				case GUI_ID_BUTTON0:
+				switch(NCode){
+					case WM_NOTIFICATION_CLICKED:
+						// USER START (Optionally insert code for reacting on notification message)
+						// USER END
+						break;
+		 			case WM_NOTIFICATION_RELEASED:
+						// USER START (Optionally insert code for reacting on notification message)
+						SPI_FLASH_SectorErase(CALADD);
+						Soft_Reset();
+						//BUTTON_SetText(WM_GetDialogItem(pMsg->hWin, GUI_ID_BUTTON0), "请按复位键");
+						// USER END
+						break;
+		  			case WM_NOTIFICATION_VALUE_CHANGED:
+						// USER START (Optionally insert code for reacting on notification message)
+						// USER END			    
+						break;
+				}
+			}
+
+
 		case WM_PAINT:	
 			GUI_SetBkColor(APPBKCOLOR);
 			GUI_SetColor(APPTEXTCOLOR);
 			GUI_Clear();
-			GUI_DispStringHCenterAt("用户自定义扩展",110,40);
+			GUI_SetTextMode(GUI_TM_TRANS);
+			GUI_DrawGradientV(0, 205, 230, 295, GUI_CYAN, GUI_CYAN);
+			GUI_DispStringHCenterAt("贪吃蛇游戏",110,40);
+			GUI_DispStringHCenterAt("游戏结束",110,110);
 			break;
-	  // USER END
-	  default:
-		WM_DefaultProc(pMsg);
-		break;
-  }
+	  	// USER END
+	  	default:
+			WM_DefaultProc(pMsg);
+			break;
+  	}
 }
 
 /*********************************************************************
@@ -142,6 +214,101 @@ static void _cbDialogUSER(WM_MESSAGE * pMsg) {
 *
 *       CreateUSB TEST
 */
+//游戏结束
+void gameover(){
+	GUI_DispStringAt("GAME OVER!", 10, 10);
+}
+
+//开始游戏
+void play(){
+	u16 i;	
+	snake.Long=2;//定义蛇的长度
+	snake.Life=0;//蛇还活着
+	snake.Direction=1;//蛇的起始方向默认为右
+	game.Score=0;//起始分数为0
+	game.Life=4;//蛇的生命值
+	food.Yes=1;//需要新食物出现
+	snake.X[0]=0;snake.Y[0]=50;
+	snake.X[1]=10;snake.Y[1]=50;	
+
+	while(1){
+		GUI_DrawRect(0,0,240,270);
+
+		//绘制矩形ILI9341_DrawRectangle(0,0,240,270,0);
+		//print Scor:game.Score
+		if(food.Yes==1)//出现新食物
+		{
+			//在设定区域内显示食物	
+			food.X=rand()%(230/10)*10;
+			food.Y=rand()%(260/10)*10;
+			food.Yes=0;
+		}
+		//显示食物
+		if(food.Yes==0){
+			GUI_DrawRect(food.X,food.Y,10,10);
+			//绘制食物点 ILI9341_DrawRectangle  (food.X,food.Y,10,10,1);
+		}
+		//更新蛇身体长度
+		for(i=snake.Long-1;i>0;i--){
+			snake.X[i]=snake.X[i-1];
+			snake.Y[i]=snake.Y[i-1];
+		}
+		switch(snake.Direction){
+			case 1:snake.X[0]+=10;break;//向右
+			case 2:snake.X[0]-=10;break;//向左
+			case 3:snake.Y[0]-=10;break;//向上
+			case 4:snake.Y[0]+=10;break;//向下
+		}
+		//画蛇
+		for(i=0;i<snake.Long;i++){
+			GUI_DrawRect(snake.X[i],snake.Y[i],10,10);
+			//一个点一个点画 ILI9341_DrawRectangle(snake.X[i],snake.Y[i],10,10,1);
+		}
+		GUI_Delay(500);//延迟500ms
+		//Delay(0xFFFFF);
+		//设置颜色 LCD_SetTextColor(BLACK)
+		GUI_SetColor(GUI_WHITE);
+		//消除已经走过的部分
+		GUI_DrawRect(snake.X[snake.Long-1],snake.Y[snake.Long-1],10,10);
+		//ILI9341_DrawRectangle(snake.X[snake.Long-1],snake.Y[snake.Long-1],10,10,1);//消除蛇身体
+		//设置颜色 LCD_SetTextColor(RED)
+		GUI_SetColor(GUI_BLACK);
+		
+		//判断是否撞墙
+		if(snake.X[0]==0||snake.X[0]>240||snake.Y[0]==0||snake.Y[0]>270)
+			snake.Life=1;//蛇撞墙死亡
+		//当蛇的身体超过三节后判断蛇自身的碰撞
+		for(i=3;i<snake.Long;i++){
+			if(snake.X[i]==snake.X[0]&&snake.Y[i]==snake.Y[0]){//任一坐标值与蛇头坐标相等就认为是自身碰撞
+			game.Life-=1;
+			}
+		}
+		if(snake.Life==1||game.Life==0){//以上两种判断以后如果蛇死亡则跳出循环，重新开始
+			gameover();
+			GUI_Delay(2000);
+			//延迟两秒后重新开始
+			GUI_Clear();
+			//清除屏幕ILI9341_Clear(0,0,LCD_X_LENGTH,LCD_Y_LENGTH);
+		}
+		//判断蛇是否吃到了食物
+		if(snake.X[0]==food.X&&snake.Y[0]==food.Y){ 
+			//设置颜色LCD_SetTextColor(BLACK)	;
+			GUI_SetColor(GUI_WHITE);
+			GUI_DrawRect(food.X,food.Y,food.X+1,food.Y+1);
+			//ILI9341_DrawRectangle(food.X,food.Y,food.X+1,food.Y+1,1);//消除吃到的食物
+			//LCD_SetTextColor(RED);
+			GUI_SetColor(GUI_BLACK);
+			snake.Long++;//蛇的身体长度加一
+			game.Score+=10;
+			//LCD_ShowNum(40,165,game.Score,3,16);显示成绩
+			food.Yes=1;//需要重新出现食物
+			}
+			//LCD_ShowNum(224,165,game.Life,1,16);显示生命值	
+		}
+	}
+}
+
+
 void FUN_ICON110Clicked(void)
 {
 	WM_HWIN hWin;
@@ -150,8 +317,39 @@ void FUN_ICON110Clicked(void)
 	
 	while(Flag_ICON110)
 	{					 				
+		Key_RefreshState(&Key1);//刷新按键状态
+		Key_RefreshState(&Key2);//刷新按键状态
+		if(Key_AccessTimes(&Key1,KEY_ACCESS_READ)!=0)//按键被按下过
+		{
+			printf("key 1\n");
+			if(snake.Direction==1)
+				snake.Direction = 3;
+			else if (snake.Direction==3)
+				snake.Direction = 2;
+			else if (snake.Direction==2)
+				snake.Direction = 4;
+			else
+				snake.Direction = 1;
+			printf("Direction=%d\n",snake.Direction);
+			Key_AccessTimes(&Key1,KEY_ACCESS_WRITE_CLEAR);
+		}
+		if(Key_AccessTimes(&Key2,KEY_ACCESS_READ)!=0)//按键被按下过
+		{
+			printf("key 2\n");
+			if(snake.Direction==1)
+				snake.Direction = 4;
+			else if (snake.Direction==4)
+				snake.Direction = 2;
+			else if (snake.Direction==2)
+				snake.Direction = 3;
+			else
+				snake.Direction = 1;
+			printf("Direction=%d\n",snake.Direction);
+			Key_AccessTimes(&Key2,KEY_ACCESS_WRITE_CLEAR);
+		}
 		if(tpad_flag)WM_DeleteWindow(hWin);
-    GUI_Delay(10); 				
+		GUI_Delay(10); 	
+    	GUI_Delay(10); 				
 	}
 }
 
