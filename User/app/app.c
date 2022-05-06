@@ -287,14 +287,14 @@ void _cbMidWin(WM_MESSAGE * pMsg)
 								 
 								 /* Camera ******************************************************************/
 								case 10:
-									Flag_ICON110 = 1;
-									FUN_ICON110Clicked();
+									Flag_ICON109 = 1;
+									FUN_ICON109Clicked();
 									break;
 								 
 								/* Calculator*****************************************************************/
 								case 11:
-									Flag_ICON110 = 1;
-									FUN_ICON110Clicked();
+									Flag_ICON109 = 1;
+									FUN_ICON109Clicked();
 //									Flag_ICON111 = 1;
 //									FUN_ICON111Clicked();
 									break;
