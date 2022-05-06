@@ -1,0 +1,9 @@
+..\..\output\bmspaceshiptop_small.o: ..\..\User\fly\bmSpaceShipTop_Small.c
+..\..\output\bmspaceshiptop_small.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+..\..\output\bmspaceshiptop_small.o: ..\..\STemWinLibrary522\inc\GUI.h
+..\..\output\bmspaceshiptop_small.o: ..\..\STemWinLibrary522\inc\GUI_ConfDefaults.h
+..\..\output\bmspaceshiptop_small.o: ..\..\STemWinLibrary522\Config\GUIConf.h
+..\..\output\bmspaceshiptop_small.o: ..\..\STemWinLibrary522\inc\GUI_Type.h
+..\..\output\bmspaceshiptop_small.o: ..\..\STemWinLibrary522\inc\LCD.h
+..\..\output\bmspaceshiptop_small.o: ..\..\STemWinLibrary522\inc\Global.h
+..\..\output\bmspaceshiptop_small.o: ..\..\STemWinLibrary522\inc\GUI_Version.h
