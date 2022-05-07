@@ -456,7 +456,9 @@ static const GUI_WIDGET_CREATE_INFO _aDialogCreateUSER[] = {
 *       _cbDialog
 */
 static void _cbDialogUSER(WM_MESSAGE * pMsg) {
-   SHIP Ship;
+	WM_HWIN hItem;
+	hItem = pMsg->hWin;
+  SHIP Ship;
   ASTEROID aAsteroid[2];
   unsigned i, Cnt;
   GUI_TIMER_TIME t0, tEnd, tNow;
