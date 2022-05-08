@@ -2,7 +2,7 @@
 ..\..\output\hw_config.o: ..\..\Mass_Storage\inc\hw_config.h
 ..\..\output\hw_config.o: ..\..\Libraries\CMSIS\stm32f10x.h
 ..\..\output\hw_config.o: ..\..\Libraries\CMSIS\core_cm3.h
-..\..\output\hw_config.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\..\output\hw_config.o: E:\flushbonading\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 ..\..\output\hw_config.o: ..\..\Libraries\CMSIS\system_stm32f10x.h
 ..\..\output\hw_config.o: ..\..\User\stm32f10x_conf.h
 ..\..\output\hw_config.o: ..\..\Libraries\FWlib\inc\stm32f10x_adc.h
@@ -30,7 +30,7 @@
 ..\..\output\hw_config.o: ..\..\Libraries\FWlib\inc\stm32f10x_wwdg.h
 ..\..\output\hw_config.o: ..\..\Libraries\FWlib\inc\misc.h
 ..\..\output\hw_config.o: ..\..\User\..\User\bsp\spi_flash\fatfs_flash_spi.h
-..\..\output\hw_config.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+..\..\output\hw_config.o: E:\flushbonading\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 ..\..\output\hw_config.o: ..\..\ff10\diskio.h
 ..\..\output\hw_config.o: ..\..\ff10\integer.h
 ..\..\output\hw_config.o: ..\..\Mass_Storage\inc\mass_mal.h

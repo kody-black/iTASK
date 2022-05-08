@@ -2,7 +2,7 @@
 ..\..\output\scsi_data.o: ..\..\Mass_Storage\inc\usb_scsi.h
 ..\..\output\scsi_data.o: ..\..\Libraries\CMSIS\stm32f10x.h
 ..\..\output\scsi_data.o: ..\..\Libraries\CMSIS\core_cm3.h
-..\..\output\scsi_data.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\..\output\scsi_data.o: E:\flushbonading\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 ..\..\output\scsi_data.o: ..\..\Libraries\CMSIS\system_stm32f10x.h
 ..\..\output\scsi_data.o: ..\..\User\stm32f10x_conf.h
 ..\..\output\scsi_data.o: ..\..\Libraries\FWlib\inc\stm32f10x_adc.h

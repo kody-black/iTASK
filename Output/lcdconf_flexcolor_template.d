@@ -10,7 +10,7 @@
 ..\..\output\lcdconf_flexcolor_template.o: ..\..\User\..\User\bsp\lcd\bsp_ili9341_lcd.h
 ..\..\output\lcdconf_flexcolor_template.o: ..\..\Libraries\CMSIS\stm32f10x.h
 ..\..\output\lcdconf_flexcolor_template.o: ..\..\Libraries\CMSIS\core_cm3.h
-..\..\output\lcdconf_flexcolor_template.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\..\output\lcdconf_flexcolor_template.o: E:\flushbonading\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 ..\..\output\lcdconf_flexcolor_template.o: ..\..\Libraries\CMSIS\system_stm32f10x.h
 ..\..\output\lcdconf_flexcolor_template.o: ..\..\User\stm32f10x_conf.h
 ..\..\output\lcdconf_flexcolor_template.o: ..\..\Libraries\FWlib\inc\stm32f10x_adc.h

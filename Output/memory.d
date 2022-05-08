@@ -2,7 +2,7 @@
 ..\..\output\memory.o: ..\..\Mass_Storage\inc\memory.h
 ..\..\output\memory.o: ..\..\Libraries\CMSIS\stm32f10x.h
 ..\..\output\memory.o: ..\..\Libraries\CMSIS\core_cm3.h
-..\..\output\memory.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\..\output\memory.o: E:\flushbonading\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 ..\..\output\memory.o: ..\..\Libraries\CMSIS\system_stm32f10x.h
 ..\..\output\memory.o: ..\..\User\stm32f10x_conf.h
 ..\..\output\memory.o: ..\..\Libraries\FWlib\inc\stm32f10x_adc.h

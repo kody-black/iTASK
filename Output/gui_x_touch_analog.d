@@ -9,7 +9,7 @@
 ..\..\output\gui_x_touch_analog.o: ..\..\User\..\User\bsp\lcd\bsp_xpt2046_lcd.h
 ..\..\output\gui_x_touch_analog.o: ..\..\Libraries\CMSIS\stm32f10x.h
 ..\..\output\gui_x_touch_analog.o: ..\..\Libraries\CMSIS\core_cm3.h
-..\..\output\gui_x_touch_analog.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\..\output\gui_x_touch_analog.o: E:\flushbonading\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 ..\..\output\gui_x_touch_analog.o: ..\..\Libraries\CMSIS\system_stm32f10x.h
 ..\..\output\gui_x_touch_analog.o: ..\..\User\stm32f10x_conf.h
 ..\..\output\gui_x_touch_analog.o: ..\..\Libraries\FWlib\inc\stm32f10x_adc.h

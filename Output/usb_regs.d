@@ -3,7 +3,7 @@
 ..\..\output\usb_regs.o: ..\..\Mass_Storage\inc\hw_config.h
 ..\..\output\usb_regs.o: ..\..\Libraries\CMSIS\stm32f10x.h
 ..\..\output\usb_regs.o: ..\..\Libraries\CMSIS\core_cm3.h
-..\..\output\usb_regs.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\..\output\usb_regs.o: E:\flushbonading\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 ..\..\output\usb_regs.o: ..\..\Libraries\CMSIS\system_stm32f10x.h
 ..\..\output\usb_regs.o: ..\..\User\stm32f10x_conf.h
 ..\..\output\usb_regs.o: ..\..\Libraries\FWlib\inc\stm32f10x_adc.h

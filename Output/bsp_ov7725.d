@@ -2,7 +2,7 @@
 ..\..\output\bsp_ov7725.o: ..\..\User\..\User\bsp\ov7725\bsp_ov7725.h
 ..\..\output\bsp_ov7725.o: ..\..\Libraries\CMSIS\stm32f10x.h
 ..\..\output\bsp_ov7725.o: ..\..\Libraries\CMSIS\core_cm3.h
-..\..\output\bsp_ov7725.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\..\output\bsp_ov7725.o: E:\flushbonading\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 ..\..\output\bsp_ov7725.o: ..\..\Libraries\CMSIS\system_stm32f10x.h
 ..\..\output\bsp_ov7725.o: ..\..\User\stm32f10x_conf.h
 ..\..\output\bsp_ov7725.o: ..\..\Libraries\FWlib\inc\stm32f10x_adc.h

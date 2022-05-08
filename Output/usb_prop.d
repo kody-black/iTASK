@@ -2,7 +2,7 @@
 ..\..\output\usb_prop.o: ..\..\Mass_Storage\inc\hw_config.h
 ..\..\output\usb_prop.o: ..\..\Libraries\CMSIS\stm32f10x.h
 ..\..\output\usb_prop.o: ..\..\Libraries\CMSIS\core_cm3.h
-..\..\output\usb_prop.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\..\output\usb_prop.o: E:\flushbonading\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 ..\..\output\usb_prop.o: ..\..\Libraries\CMSIS\system_stm32f10x.h
 ..\..\output\usb_prop.o: ..\..\User\stm32f10x_conf.h
 ..\..\output\usb_prop.o: ..\..\Libraries\FWlib\inc\stm32f10x_adc.h

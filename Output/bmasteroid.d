@@ -1,5 +1,5 @@
 ..\..\output\bmasteroid.o: ..\..\User\fly\bmAsteroid.c
-..\..\output\bmasteroid.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+..\..\output\bmasteroid.o: E:\flushbonading\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 ..\..\output\bmasteroid.o: ..\..\STemWinLibrary522\inc\GUI.h
 ..\..\output\bmasteroid.o: ..\..\STemWinLibrary522\inc\GUI_ConfDefaults.h
 ..\..\output\bmasteroid.o: ..\..\STemWinLibrary522\Config\GUIConf.h

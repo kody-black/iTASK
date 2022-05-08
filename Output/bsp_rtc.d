@@ -2,7 +2,7 @@
 ..\..\output\bsp_rtc.o: ..\..\User\..\User\bsp\rtc\bsp_rtc.h
 ..\..\output\bsp_rtc.o: ..\..\Libraries\CMSIS\stm32f10x.h
 ..\..\output\bsp_rtc.o: ..\..\Libraries\CMSIS\core_cm3.h
-..\..\output\bsp_rtc.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\..\output\bsp_rtc.o: E:\flushbonading\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 ..\..\output\bsp_rtc.o: ..\..\Libraries\CMSIS\system_stm32f10x.h
 ..\..\output\bsp_rtc.o: ..\..\User\stm32f10x_conf.h
 ..\..\output\bsp_rtc.o: ..\..\Libraries\FWlib\inc\stm32f10x_adc.h
@@ -32,4 +32,4 @@
 ..\..\output\bsp_rtc.o: ..\..\User\..\User\bsp\rtc\bsp_calendar.h
 ..\..\output\bsp_rtc.o: ..\..\User\..\User\bsp\rtc\bsp_date.h
 ..\..\output\bsp_rtc.o: ..\..\User\..\User\bsp\usart\bsp_usart1.h
-..\..\output\bsp_rtc.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+..\..\output\bsp_rtc.o: E:\flushbonading\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
