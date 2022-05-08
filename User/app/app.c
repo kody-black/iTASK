@@ -54,7 +54,7 @@ uint8_t Flag_ICON107  = 0;
 uint8_t Flag_ICON108  = 0;
 uint8_t Flag_ICON109  = 0;
 uint8_t Flag_ICON110  = 0;
-//uint8_t Flag_ICON111  = 0;
+uint8_t Flag_ICON111  = 0;
 
 
 /* 用于桌面ICONVIEW图标的创建 */
@@ -302,16 +302,8 @@ void _cbMidWin(WM_MESSAGE * pMsg)
 								 
 								/* Calculator*****************************************************************/
 								case 11:
-									Flag_ICON110 = 1;
-									WM_HideWindow(WinPara.hWinMid);
-									WM_HideWindow(MIDWIN);
-									WM_HideWindow(hText);
-								  WM_HideWindow(iText);
-									WM_HideWindow(BOTWIN);
-									WM_HideWindow(hFrameClose);
-									FUN_ICON110Clicked();
-//									Flag_ICON111 = 1;
-//									FUN_ICON111Clicked();
+									Flag_ICON111 = 1;
+									FUN_ICON111Clicked();
 									break;
 								default:break;
 								}
