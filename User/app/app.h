@@ -89,8 +89,8 @@ extern void FUN_ICON109Clicked(void);
 extern uint8_t Flag_ICON110;
 extern void FUN_ICON110Clicked(void);
 
-//extern uint8_t Flag_ICON111;
-//extern void FUN_ICON111Clicked(void);
+extern uint8_t Flag_ICON111;
+extern void FUN_ICON111Clicked(void);
 
 /*
 *********************************************************************************************************

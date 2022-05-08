@@ -1107,6 +1107,16 @@
               <FileType>1</FileType>
               <FilePath>..\..\User\fly\bmSpaceShipTop_Small.c</FilePath>
             </File>
+            <File>
+              <FileName>AircraftWar.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\app\AircraftWar.c</FilePath>
+            </File>
+            <File>
+              <FileName>snake.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\app\snake.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

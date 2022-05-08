@@ -246,9 +246,15 @@ void _cbMidWin(WM_MESSAGE * pMsg)
 									FUN_ICON102Clicked();	
 									break;
 								
-								/* EEPROM ********************************************************************/
+								/* ·É»ú´óÕ½ ********************************************************************/
 								case 3:
 									Flag_ICON103 = 1;
+									WM_HideWindow(WinPara.hWinMid);
+									WM_HideWindow(MIDWIN);
+									WM_HideWindow(hText);
+								    WM_HideWindow(iText);
+									WM_HideWindow(hFrameClose);
+									WM_HideWindow(BOTWIN);
 									FUN_ICON103Clicked();
 									break;
 								
@@ -291,16 +297,10 @@ void _cbMidWin(WM_MESSAGE * pMsg)
 								 /* Camera ******************************************************************/
 								case 10:
 									Flag_ICON110 = 1;
-									WM_HideWindow(WinPara.hWinMid);
-									WM_HideWindow(MIDWIN);
-									WM_HideWindow(hText);
-								  WM_HideWindow(iText);
-									WM_HideWindow(hFrameClose);
-									WM_HideWindow(BOTWIN);
 									FUN_ICON110Clicked();
 									break;
 								 
-								/* Calculator*****************************************************************/
+								/* Ì°³ÔÉß*****************************************************************/
 								case 11:
 									Flag_ICON111 = 1;
 									FUN_ICON111Clicked();

@@ -327,7 +327,7 @@ static void _cbDialogEEPROM(WM_MESSAGE * pMsg) {
 *
 *       CreateEEPROM TEST
 */
-void FUN_ICON103Clicked(void)
+void change_FUN_ICON103Clicked(void)
 {
 	WM_HWIN hWin;
 	uint8_t flag=0;
