@@ -252,7 +252,7 @@ void _cbMidWin(WM_MESSAGE * pMsg)
 									WM_HideWindow(WinPara.hWinMid);
 									WM_HideWindow(MIDWIN);
 									WM_HideWindow(hText);
-								    WM_HideWindow(iText);
+								  WM_HideWindow(iText);
 									WM_HideWindow(hFrameClose);
 									WM_HideWindow(BOTWIN);
 									FUN_ICON103Clicked();
@@ -303,6 +303,12 @@ void _cbMidWin(WM_MESSAGE * pMsg)
 								/* Ã∞≥‘…ﬂ*****************************************************************/
 								case 11:
 									Flag_ICON111 = 1;
+									WM_HideWindow(WinPara.hWinMid);
+									WM_HideWindow(MIDWIN);
+									WM_HideWindow(hText);
+								  WM_HideWindow(iText);
+									WM_HideWindow(hFrameClose);
+									WM_HideWindow(BOTWIN);
 									FUN_ICON111Clicked();
 									break;
 								default:break;

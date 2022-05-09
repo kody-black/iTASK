@@ -1,0 +1,9 @@
+..\..\output\bmspaceshipleft_small.o: ..\..\User\fly\bmSpaceShipLeft_Small.c
+..\..\output\bmspaceshipleft_small.o: E:\flushbonading\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+..\..\output\bmspaceshipleft_small.o: ..\..\STemWinLibrary522\inc\GUI.h
+..\..\output\bmspaceshipleft_small.o: ..\..\STemWinLibrary522\inc\GUI_ConfDefaults.h
+..\..\output\bmspaceshipleft_small.o: ..\..\STemWinLibrary522\Config\GUIConf.h
+..\..\output\bmspaceshipleft_small.o: ..\..\STemWinLibrary522\inc\GUI_Type.h
+..\..\output\bmspaceshipleft_small.o: ..\..\STemWinLibrary522\inc\LCD.h
+..\..\output\bmspaceshipleft_small.o: ..\..\STemWinLibrary522\inc\Global.h
+..\..\output\bmspaceshipleft_small.o: ..\..\STemWinLibrary522\inc\GUI_Version.h

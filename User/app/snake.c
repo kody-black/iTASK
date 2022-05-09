@@ -33,38 +33,35 @@ struct Game{
 
 
 
-static void KEY1_IRQHandler(void){
-  //???????EXTI Line??
-	//4231
-	if(EXTI_GetITStatus(KEY1_INT_EXTI_LINE) != RESET) 
-	{ 
-		if(snake.Direction==1)
-			snake.Direction = 3;
-		else if (snake.Direction==3)
-			snake.Direction = 2;
-		else if (snake.Direction==2)
-			snake.Direction = 4;
-		else
-			snake.Direction = 1;
-		EXTI_ClearITPendingBit(KEY1_INT_EXTI_LINE);     
-	}  
-}
-
-static void KEY2_IRQHandler(void){
-  //???????EXTI Line??
-	if(EXTI_GetITStatus(KEY2_INT_EXTI_LINE) != RESET) 
-	{
-		if(snake.Direction==1)
-			snake.Direction = 4;
-		else if (snake.Direction==4)
-			snake.Direction = 2;
-		else if (snake.Direction==2)
-			snake.Direction = 3;
-		else
-			snake.Direction = 1;
-		EXTI_ClearITPendingBit(KEY2_INT_EXTI_LINE);     
-	} 
-
+static int _getdirection(int pre_direction){
+    int direction=0;
+	  GUI_PID_STATE state;
+    GUI_PID_GetState(&state);
+    if(state.Pressed){
+       if(state.x < 120){
+              if(pre_direction == 1)
+									direction = 3;
+              else if (pre_direction == 3)
+									direction = 2;
+							else if (pre_direction==2)
+									direction = 4;
+							else
+									direction = 1;
+							}
+						else {
+						if(pre_direction == 1)
+								direction = 4;
+						else if (pre_direction == 4)
+								direction = 2;
+						else if (pre_direction==2)
+							direction = 3;
+			else
+					direction = 1;
+					}
+						return direction;
+			}
+			else
+				return pre_direction;
 }
 
 //?????????????
@@ -76,7 +73,7 @@ static const GUI_WIDGET_CREATE_INFO _aDialogCreateSNAKE[] = {
 
 static void _cbDialogSNAKE(WM_MESSAGE * pMsg) {
     
-    int i;	
+  int i;	
 	snake.Long=2;//??????
 	snake.Life=0;//????
 	snake.Direction=1;//??????????
@@ -86,12 +83,13 @@ static void _cbDialogSNAKE(WM_MESSAGE * pMsg) {
 	snake.X[0]=0;snake.Y[0]=50;
 	snake.X[1]=10;snake.Y[1]=50;
 
-    GUI_SetBkColor(GUI_WHITE);
-    GUI_Clear();
+    // GUI_SetColor(GUI_BLACK);
+		GUI_SetBkColor(GUI_WHITE);
   
-	while(1){
-		GUI_DrawRect(0,10,240,270);
+	while(1){	
 		while(1){
+			GUI_Clear();
+			GUI_DrawRect(0,10,240,270);
 			if(food.Yes==1){
 				//??????????	
 				food.X=rand()%(190/10)*10;
@@ -101,13 +99,14 @@ static void _cbDialogSNAKE(WM_MESSAGE * pMsg) {
 			//????
 			if(food.Yes==0){
 				GUI_SetColor(GUI_BLACK);
-				GUI_FillRect(food.X,food.Y,10,10);
+				GUI_FillRect(food.X,food.Y,food.X+10,food.Y+10);
 			}
 			//???????
 			for(i=snake.Long-1;i>0;i--){
 				snake.X[i]=snake.X[i-1];
 				snake.Y[i]=snake.Y[i-1];
 			}
+			snake.Direction = _getdirection(snake.Direction);
 			switch(snake.Direction){
 				case 1:snake.X[0]+=10;break;//??
 				case 2:snake.X[0]-=10;break;//??
@@ -117,12 +116,12 @@ static void _cbDialogSNAKE(WM_MESSAGE * pMsg) {
 			//??
 			for(i=0;i<snake.Long;i++){
 				GUI_SetColor(GUI_BLACK);
-				GUI_FillRect(snake.X[i],snake.Y[i],10,10);
+				GUI_FillRect(snake.X[i],snake.Y[i],snake.X[i] + 10,snake.Y[i] + 10);
 			}
-			GUI_Delay(100);//??100ms
+			GUI_Delay(500);//??100ms
 
 			GUI_SetColor(GUI_WHITE);//?????????
-			GUI_FillRect(snake.X[snake.Long-1],snake.Y[snake.Long-1],10,10);//?????
+			GUI_FillRect(snake.X[snake.Long-1],snake.Y[snake.Long-1],snake.X[snake.Long - 1] + 10,snake.Y[snake.Long - 1] + 10);//?????
 
 			GUI_SetColor(GUI_BLACK);
 			//??????
@@ -133,7 +132,9 @@ static void _cbDialogSNAKE(WM_MESSAGE * pMsg) {
 				if(snake.X[i]==snake.X[0]&&snake.Y[i]==snake.Y[0])//????????????????????
 				game.Life-=1;
 			}
+			
 
+			
 			//??????????????????,????
 			if(snake.Life==1||game.Life==0){
 				GUI_DispStringHCenterAt("GAME OVER!", LCD_GetXSize() / 2, LCD_GetYSize()/2);
@@ -141,6 +142,7 @@ static void _cbDialogSNAKE(WM_MESSAGE * pMsg) {
 				GUI_Clear();
 				break;
 			}
+			
 			//??????????
 			if(snake.X[0]==food.X&&snake.Y[0]==food.Y){ 
 				GUI_SetColor(GUI_WHITE);
@@ -152,6 +154,7 @@ static void _cbDialogSNAKE(WM_MESSAGE * pMsg) {
 			}
 		}
 	}
+	
 
 }
 

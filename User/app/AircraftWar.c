@@ -389,6 +389,8 @@ static void _Explain(void) {
     GUI_X_Delay(10);
   } while (1);
   GUI_Clear();
+	GUI_SetColor(GUI_BLACK);
+  GUI_SetBkColor(GUI_WHITE);
   GUI_DispStringHCenterAt("Good luck...", XSIZE_DISPLAY / 2, YSIZE_DISPLAY / 2 - 4);
   GUI_Delay(1000);
   GUI_Clear();
