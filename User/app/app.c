@@ -85,7 +85,7 @@ static const BITMAP_ITEM _aBitmapItem1[] = {
   {&bmkey,  	 	"KEY"		    },
   {&bmrgbled,	 	"Breathing"	}, 
   {&bmadc,  	 	"ADC"				},
-	{&bmeeprom,   "EEPROM" 		},
+	{&bmfly,   "AircraftWar" 		},
 	
   {&bmclock,    "Clock" 		},
 	{&bmusb,  	  "USB"		    },
@@ -95,7 +95,7 @@ static const BITMAP_ITEM _aBitmapItem1[] = {
   {&bmcamera,   "Camera"		}, 
 	{&bmcalculator,"Calculator"},
 	{&bmAPP1,    	"UserApp" 	},	
-	{&bmAPP2,    	"UserApp" 	},	
+	{&bmsnake,    	"Snake" 	},	
 };
 
 //void FUN_ICON000Clicked(void)  {printf("FUN_ICON000Clicked\n");}
