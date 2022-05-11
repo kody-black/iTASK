@@ -27,6 +27,10 @@
 WM_HWIN hFrameClose=0;
 GUI_XBF_DATA XBF_Data;
 GUI_FONT     XBF_Font;
+WM_HWIN hText;
+WM_HWIN MIDWIN;
+WM_HWIN iText;
+WM_HWIN BOTWIN;
 
 /*时间结构体*/
 extern struct rtc_time systmtime;
@@ -50,7 +54,7 @@ uint8_t Flag_ICON107  = 0;
 uint8_t Flag_ICON108  = 0;
 uint8_t Flag_ICON109  = 0;
 uint8_t Flag_ICON110  = 0;
-//uint8_t Flag_ICON111  = 0;
+uint8_t Flag_ICON111  = 0;
 
 
 /* 用于桌面ICONVIEW图标的创建 */
@@ -81,7 +85,7 @@ static const BITMAP_ITEM _aBitmapItem1[] = {
   {&bmkey,  	 	"KEY"		    },
   {&bmrgbled,	 	"Breathing"	}, 
   {&bmadc,  	 	"ADC"				},
-	{&bmeeprom,   "EEPROM" 		},
+	{&bmfly,   "AircraftWar" 		},
 	
   {&bmclock,    "Clock" 		},
 	{&bmusb,  	  "USB"		    },
@@ -91,7 +95,7 @@ static const BITMAP_ITEM _aBitmapItem1[] = {
   {&bmcamera,   "Camera"		}, 
 	{&bmcalculator,"Calculator"},
 	{&bmAPP1,    	"UserApp" 	},	
-	{&bmAPP2,    	"UserApp" 	},	
+	{&bmsnake,    	"Snake" 	},	
 };
 
 //void FUN_ICON000Clicked(void)  {printf("FUN_ICON000Clicked\n");}
@@ -123,7 +127,6 @@ static const BITMAP_ITEM _aBitmapItem1[] = {
 */
 void _cbBkWindow(WM_MESSAGE * pMsg) 
 {
-	WM_HWIN hText;
 	char text_buffer[20]={0};
 	int NCode, Id;
 	switch (pMsg->MsgId) 
@@ -170,7 +173,7 @@ void _cbBkWindow(WM_MESSAGE * pMsg)
 				break;
 			}
 			/* 获取text句柄 */      
-			hText = WM_GetDialogItem(pMsg->hWin, GUI_ID_TEXT1);
+			iText = WM_GetDialogItem(pMsg->hWin, GUI_ID_TEXT1);
 			
 			/* 转换rtc值至北京时间 */
 			RTC_TimeCovr(&systmtime);
@@ -178,7 +181,7 @@ void _cbBkWindow(WM_MESSAGE * pMsg)
 			/* 转换成字符串 */
 			sprintf(text_buffer,"%02d:%02d:%02d",systmtime.tm_hour,systmtime.tm_min,systmtime.tm_sec);
 			/* 输出时间 */
-			TEXT_SetText(hText,text_buffer);
+			TEXT_SetText(iText,text_buffer);
 			WM_RestartTimer(pMsg->Data.v, 250);
 		break;
 		/* 重绘消息*/
@@ -243,9 +246,15 @@ void _cbMidWin(WM_MESSAGE * pMsg)
 									FUN_ICON102Clicked();	
 									break;
 								
-								/* EEPROM ********************************************************************/
+								/* 飞机大战 ********************************************************************/
 								case 3:
 									Flag_ICON103 = 1;
+									WM_HideWindow(WinPara.hWinMid);
+									WM_HideWindow(MIDWIN);
+									WM_HideWindow(hText);
+								  WM_HideWindow(iText);
+									WM_HideWindow(hFrameClose);
+									WM_HideWindow(BOTWIN);
 									FUN_ICON103Clicked();
 									break;
 								
@@ -291,12 +300,16 @@ void _cbMidWin(WM_MESSAGE * pMsg)
 									FUN_ICON110Clicked();
 									break;
 								 
-								/* Calculator*****************************************************************/
+								/* 贪吃蛇*****************************************************************/
 								case 11:
-									Flag_ICON110 = 1;
-									FUN_ICON110Clicked();
-//									Flag_ICON111 = 1;
-//									FUN_ICON111Clicked();
+									Flag_ICON111 = 1;
+									WM_HideWindow(WinPara.hWinMid);
+									WM_HideWindow(MIDWIN);
+									WM_HideWindow(hText);
+								  WM_HideWindow(iText);
+									WM_HideWindow(hFrameClose);
+									WM_HideWindow(BOTWIN);
+									FUN_ICON111Clicked();
 									break;
 								default:break;
 								}
@@ -326,7 +339,6 @@ void _cbMidWin(WM_MESSAGE * pMsg)
   */
 static void CreateTopWin(void)
 {
-	WM_HWIN hText;
 	/* 顶部的 "wildfire OS "文本 */
 	hText = TEXT_CreateEx(0, 2, 60 , 16, WM_HBKWIN, WM_CF_SHOW, GUI_TA_LEFT|TEXT_CF_VCENTER, GUI_ID_TEXT0, "Wildfire OS");
 	TEXT_SetFont(hText, GUI_FONT_10_ASCII);
@@ -346,7 +358,6 @@ static void CreateTopWin(void)
 static void CreateMidWin(void)
 {
 	uint8_t i=0;
-	WM_HWIN MIDWIN;
 	WinPara.hWinMid= WM_CreateWindowAsChild(
 											WinPara.xPosWin,											
 											WinPara.yPosWin,
@@ -399,7 +410,6 @@ static void CreateMidWin(void)
 static void CreateBotWin(void)
 {
 	uint8_t i;
-	WM_HWIN BOTWIN;
 	/*在指定位置创建指定尺寸的ICONVIEW 小工具*/
 	BOTWIN=ICONVIEW_CreateEx(
 							 62,                					      /* 小工具的最左像素（在父坐标中）*/

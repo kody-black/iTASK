@@ -1,4 +1,4 @@
-﻿/**************************************************************************************
+/**************************************************************************************
 * 因为emWin显示只支持UTF-8编码格式的中文，如果希望直接显示在Keil直接输入的中文，      *
 *            比如使用：GUI_DispStringHCenterAt("流水灯",110,120);                     *
 * 该文件必须以UTF-8编码格式，不然中文无法正常显示。                                   *
@@ -123,7 +123,7 @@ static void _cbDialogUSER(WM_MESSAGE * pMsg) {
 			GUI_SetBkColor(APPBKCOLOR);
 			GUI_SetColor(APPTEXTCOLOR);
 			GUI_Clear();
-			GUI_DispStringHCenterAt("用户自定义扩展",110,40);
+			GUI_DispStringHCenterAt("USER OWN DEFINE",110,40);
 			break;
 	  // USER END
 	  default:

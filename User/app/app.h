@@ -48,6 +48,8 @@ extern GUI_CONST_STORAGE GUI_BITMAP bmcalculator;
 
 extern GUI_CONST_STORAGE GUI_BITMAP bmAPP1;
 extern GUI_CONST_STORAGE GUI_BITMAP bmAPP2;
+extern GUI_CONST_STORAGE GUI_BITMAP bmfly;
+extern GUI_CONST_STORAGE GUI_BITMAP bmsnake;
 
 
 extern uint8_t Flag_ICON000;
@@ -89,8 +91,8 @@ extern void FUN_ICON109Clicked(void);
 extern uint8_t Flag_ICON110;
 extern void FUN_ICON110Clicked(void);
 
-//extern uint8_t Flag_ICON111;
-//extern void FUN_ICON111Clicked(void);
+extern uint8_t Flag_ICON111;
+extern void FUN_ICON111Clicked(void);
 
 /*
 *********************************************************************************************************
