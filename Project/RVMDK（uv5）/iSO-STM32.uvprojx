@@ -1117,6 +1117,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\User\app\snake.c</FilePath>
             </File>
+            <File>
+              <FileName>ScheduleDLG.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>D:\我的文档\桌面文件\temp\ScheduleDLG.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

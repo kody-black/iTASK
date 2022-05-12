@@ -226,12 +226,12 @@ void FUN_ICON109Clicked(void)
 	//OS_INFO("Calculatorapp create\n");
 	hWin=GUI_CreateDialogBox(_aDialogCreate, GUI_COUNTOF(_aDialogCreate), _cbDialog, WM_HBKWIN, 0, 0);
 
-	while(1)
-	{
+	//while(1)
+	//{
 		//if(tpad_flag)WM_DeleteWindow(hWin);
-		_cbDialog();
+	//	_cbDialog();
 		//GUI_Delay(10);
-	}
+	//}
 }
 // USER START (Optionally insert additional public code)
 //void MainTask(void)
