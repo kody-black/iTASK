@@ -180,7 +180,7 @@ static void _cbDialogCal(WM_MESSAGE * pMsg)
 	{
 		case WM_DELETE:
 		OS_INFO("Calculatorapp delete\n");
-		Flag_ICON109 = 0;
+		Flag_ICON103 = 0;
 		s_Key=0;
 		text1[0]='\0';
 		text2[0]='\0';
@@ -438,13 +438,13 @@ static void _cbDialogCal(WM_MESSAGE * pMsg)
 *	返 回 值: 无
 *********************************************************************************************************
 */
-void FUN_ICON109Clicked(void)
+void FUN_ICON103Clicked(void)
 {
 	WM_HWIN hWin;
 	OS_INFO("Calculatorapp create\n");
 	hWin=GUI_CreateDialogBox(_aDialogCreateCal, GUI_COUNTOF(_aDialogCreateCal), _cbDialogCal, WM_HBKWIN, 0, 0);
 	
-	while(Flag_ICON109)
+	while(Flag_ICON103)
 	{
 		if(tpad_flag)WM_DeleteWindow(hWin);
 		GUI_Delay(10);

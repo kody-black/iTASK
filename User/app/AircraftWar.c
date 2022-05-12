@@ -553,13 +553,13 @@ static void _cbDialogUSER(WM_MESSAGE * pMsg) {
 *
 *       CreateUSB TEST
 */
-void FUN_ICON103Clicked(void)
+void FUN_ICON104Clicked(void)
 {
 	WM_HWIN hWin;
 	OS_INFO("USERapp create\n");
 	hWin=GUI_CreateDialogBox(_aDialogCreateUSER, GUI_COUNTOF(_aDialogCreateUSER), _cbDialogUSER, WM_HBKWIN, 0, 0);
 	
-	while(Flag_ICON110)
+	while(Flag_ICON104)
 	{					 				
 		if(tpad_flag)WM_DeleteWindow(hWin);
     GUI_Delay(10); 				

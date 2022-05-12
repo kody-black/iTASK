@@ -1018,19 +1018,9 @@
               <FilePath>..\..\User\app\keypadapp.c</FilePath>
             </File>
             <File>
-              <FileName>EEPROMapp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\app\EEPROMapp.c</FilePath>
-            </File>
-            <File>
               <FileName>Clockapp.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\app\Clockapp.c</FilePath>
-            </File>
-            <File>
-              <FileName>Wifi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\app\Wifi.c</FilePath>
             </File>
             <File>
               <FileName>Cameraapp.c</FileName>
@@ -1088,9 +1078,9 @@
               <FilePath>..\..\User\app\snake.c</FilePath>
             </File>
             <File>
-              <FileName>Calendar.c</FileName>
+              <FileName>schedule.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\User\app\Calendar.c</FilePath>
+              <FilePath>..\..\User\app\schedule.c</FilePath>
             </File>
           </Files>
         </Group>

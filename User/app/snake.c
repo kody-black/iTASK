@@ -159,7 +159,7 @@ static void _cbDialogSNAKE(WM_MESSAGE * pMsg) {
 
 }
 
-void FUN_ICON111Clicked(void)
+void FUN_ICON105Clicked(void)
 {
 	WM_HWIN hWin;
 	OS_INFO("SNAKE create\n");
@@ -169,7 +169,7 @@ void FUN_ICON111Clicked(void)
 	//WM_BringToTop(hWin);
 	
 
-	while(Flag_ICON111)
+	while(Flag_ICON105)
 	{					 				
 		if(tpad_flag)WM_DeleteWindow(hWin);
     GUI_Delay(10); 				

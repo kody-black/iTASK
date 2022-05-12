@@ -82,20 +82,21 @@ static const BITMAP_ITEM _aBitmapItem0[] = {
 };
 /* 用于桌面ICONVIEW1图标的创建 */
 static const BITMAP_ITEM _aBitmapItem1[] = {
-  {&bmkey,  	 	"KEY"		    },
-  {&bmrgbled,	 	"Breathing"	}, 
-  {&bmadc,  	 	"ADC"				},
-	{&bmfly,   "AircraftWar" 		},
+  //{&bmkey,  	 	"KEY"		    },
+  //{&bmrgbled,	 	"Breathing"	}, 
+  //{&bmadc,  	 	"ADC"				},
 	
   {&bmclock,    "Clock" 		},
-	{&bmusb,  	  "USB"		    },
-	{&bmwifi,			"Wifi"		  },	
-	{&bmWeather,  "Humiture"  }, 
+	{&bmclendar,    "Calendar" 		},
+	//{&bmusb,  	  "USB"		    },
+	//{&bmwifi,			"Wifi"		  },	
+	//{&bmWeather,  "Humiture"  }, 
 	
   {&bmcamera,   "Camera"		}, 
-	{&bmcalculator,"Calculator"},
-	{&bmAPP1,    	"UserApp" 	},	
-	{&bmsnake,    	"Snake" 	},	
+  {&bmcalculator,"Calculator"},
+	//{&bmAPP1,    	"UserApp" 	},	
+	{&bmfly,   "FlyWar" 		},
+	{&bmsnake,    	"Snake" 	}	
 };
 
 //void FUN_ICON000Clicked(void)  {printf("FUN_ICON000Clicked\n");}
@@ -228,89 +229,96 @@ void _cbMidWin(WM_MESSAGE * pMsg)
 							/* 打开相应选项 */
 							switch(ICONVIEW_GetSel(pMsg->hWinSrc))
 							{								
-								/* KEY  ******************************************************************/
+								/* clock  ******************************************************************/
 								case 0:	
-									Flag_ICON109 = 1;
-									FUN_ICON109Clicked();			
+									Flag_ICON100 = 1;
+									FUN_ICON100Clicked();			
 									break;	
 								
-								/* Breathing ***********************************************************************/
+								/* secedule ***********************************************************************/
 								case 1:
-									Flag_ICON109 = 1;
-									FUN_ICON109Clicked();
+									Flag_ICON101 = 1;
+									FUN_ICON101Clicked();
 									break;
 								
-								/* ADC *********************************************************************/
+								/* Camera *********************************************************************/
 								case 2:
-									Flag_ICON109 = 1;
-									FUN_ICON109Clicked();	
+									Flag_ICON102 = 1;
+									FUN_ICON102Clicked();	
 									break;
 								
-								/* 飞机大战 ********************************************************************/
+								/* Calculator ********************************************************************/
 								case 3:
-									Flag_ICON109 = 1;
+									Flag_ICON103 = 1;
+									FUN_ICON103Clicked();	
+									break;
+									
+								
+								/* Fly War **********************************************************************/
+								case 4:
+									Flag_ICON104 = 1;
 									WM_HideWindow(WinPara.hWinMid);
 									WM_HideWindow(MIDWIN);
 									WM_HideWindow(hText);
 								  WM_HideWindow(iText);
 									WM_HideWindow(hFrameClose);
 									WM_HideWindow(BOTWIN);
-									FUN_ICON109Clicked();
-									break;
-								
-								/* Clock **********************************************************************/
-								case 4:
-									Flag_ICON104 = 1;
 									FUN_ICON104Clicked();
 									break;
 								
-								/* Music ********************************************************************/
+								/* snake ********************************************************************/
 								case 5:
-									Flag_ICON109 = 1;
-									FUN_ICON109Clicked();
-									break;
-								
-								/* Recorder ******************************************************************/
-								case 6:					
-									Flag_ICON109 = 1;
-									FUN_ICON109Clicked();
-									break;
-								
-								/* Calendar *******************************************************************/
-								case 7:
-									Flag_ICON107 = 1;
-									FUN_ICON107Clicked();
-									break;
-								
-								/* 照相机 ******************************************************************/
-								case 8:
-									Flag_ICON108 = 1;
-									FUN_ICON108Clicked();
-									break;
-								 
-								 /* Calculator ******************************************************************/
-								case 9:
-									Flag_ICON109 = 1;
-									FUN_ICON109Clicked();
-									break;
-								 
-								 /* Caculator ******************************************************************/
-								case 10:
-									Flag_ICON109 = 1;
-									FUN_ICON109Clicked();
-									break;
-								 
-								/* Snake*****************************************************************/
-								case 11:
-									Flag_ICON111 = 1;
+									Flag_ICON105 = 1;
 									WM_HideWindow(WinPara.hWinMid);
 									WM_HideWindow(MIDWIN);
 									WM_HideWindow(hText);
 								  WM_HideWindow(iText);
 									WM_HideWindow(hFrameClose);
 									WM_HideWindow(BOTWIN);
-									FUN_ICON111Clicked();
+									FUN_ICON105Clicked();
 									break;
+								
+								// /* Recorder ******************************************************************/
+								// case 6:					
+								// 	Flag_ICON106 = 1;
+								// 	FUN_ICON106Clicked();
+								// 	break;
+								
+								// /* Calendar *******************************************************************/
+								// case 7:
+								// 	Flag_ICON107 = 1;
+								// 	FUN_ICON107Clicked();
+								// 	break;
+								
+								// /* 照相机 ******************************************************************/
+								// case 8:
+								// 	Flag_ICON108 = 1;
+								// 	FUN_ICON108Clicked();
+								// 	break;
+								 
+								//  /* Calculator ******************************************************************/
+								// case 9:
+								// 	Flag_ICON109 = 1;
+								// 	FUN_ICON109Clicked();
+								// 	break;
+								 
+								//  /* Caculator ******************************************************************/
+								// case 10:
+								// 	Flag_ICON109 = 1;
+								// 	FUN_ICON110Clicked();
+								// 	break;
+								 
+								// /* Snake*****************************************************************/
+								// case 11:
+								// 	Flag_ICON111 = 1;
+								// 	WM_HideWindow(WinPara.hWinMid);
+								// 	WM_HideWindow(MIDWIN);
+								// 	WM_HideWindow(hText);
+								//   WM_HideWindow(iText);
+								// 	WM_HideWindow(hFrameClose);
+								// 	WM_HideWindow(BOTWIN);
+								// 	FUN_ICON111Clicked();
+								// 	break;
 								default:break;
 								}
 							 break;

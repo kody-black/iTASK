@@ -51,6 +51,8 @@ extern GUI_CONST_STORAGE GUI_BITMAP bmAPP2;
 extern GUI_CONST_STORAGE GUI_BITMAP bmfly;
 extern GUI_CONST_STORAGE GUI_BITMAP bmsnake;
 
+extern GUI_CONST_STORAGE GUI_BITMAP bmclendar;
+
 
 extern uint8_t Flag_ICON000;
 extern void FUN_ICON000Clicked(void);
@@ -76,23 +78,23 @@ extern void FUN_ICON104Clicked(void);
 extern uint8_t Flag_ICON105;
 extern void FUN_ICON105Clicked(void);
 
-extern uint8_t Flag_ICON106;
-extern void FUN_ICON106Clicked(void);
+// extern uint8_t Flag_ICON106;
+// extern void FUN_ICON106Clicked(void);
 
-extern uint8_t Flag_ICON107;
-extern void FUN_ICON107Clicked(void);
+// extern uint8_t Flag_ICON107;
+// extern void FUN_ICON107Clicked(void);
 
-extern uint8_t Flag_ICON108;
-extern void FUN_ICON108Clicked(void);
+// extern uint8_t Flag_ICON108;
+// extern void FUN_ICON108Clicked(void);
 
-extern uint8_t Flag_ICON109;
-extern void FUN_ICON109Clicked(void);
+// extern uint8_t Flag_ICON109;
+// extern void FUN_ICON109Clicked(void);
 
-extern uint8_t Flag_ICON110;
-extern void FUN_ICON110Clicked(void);
+// extern uint8_t Flag_ICON110;
+// extern void FUN_ICON110Clicked(void);
 
-extern uint8_t Flag_ICON111;
-extern void FUN_ICON111Clicked(void);
+// extern uint8_t Flag_ICON111;
+// extern void FUN_ICON111Clicked(void);
 
 /*
 *********************************************************************************************************

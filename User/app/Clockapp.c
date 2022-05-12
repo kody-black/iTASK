@@ -465,7 +465,7 @@ static void _cbDialogClock(WM_MESSAGE * pMsg) {
 *
 *       CreateClock
 */
-void FUN_ICON104Clicked(void)
+void FUN_ICON100Clicked(void)
 {
 	WM_HWIN hWin;
 	OS_INFO("Clockapp create\n");

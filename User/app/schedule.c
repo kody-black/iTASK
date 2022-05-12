@@ -220,7 +220,7 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
 //  hWin = GUI_CreateDialogBox(_aDialogCreate, GUI_COUNTOF(_aDialogCreate), _cbDialog, WM_HBKWIN, 0, 0);
 //  return hWin;
 //}
-void FUN_ICON109Clicked(void)
+void FUN_ICON101Clicked(void)
 {
 	WM_HWIN hWin;
 	//OS_INFO("Calculatorapp create\n");

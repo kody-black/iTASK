@@ -104,7 +104,7 @@ void cbCameraWin(WM_MESSAGE * pMsg)
 	  case WM_DELETE:
 			OS_INFO("Cameraapp delete\n");
 			DisableCamera();
-			Flag_ICON108=0;
+			Flag_ICON102=0;
 			UserApp_Flag = 0;		
 			ILI9341_GramScan(1);
 			tpad_flag=0;
@@ -120,7 +120,7 @@ void cbCameraWin(WM_MESSAGE * pMsg)
 *
 *       CreateCamera
 */
-void FUN_ICON108Clicked(void)
+void FUN_ICON102Clicked(void)
 {
 	WM_HWIN hWin;
 	OS_ERR     err;
@@ -150,7 +150,7 @@ void FUN_ICON108Clicked(void)
 		while(1)
 		{
 			WM_DeleteWindow(hWin);
-			if(!Flag_ICON108)return;
+			if(!Flag_ICON102)return;
 			GUI_Delay(10);
 		}
 	}
