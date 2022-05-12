@@ -82,4 +82,5 @@ void KeyCreate(KEY *p_Key,KEY_CALLBACK_PTR p_CallBack);
 void Key_RefreshState(KEY* theKey);
 uint8_t Key_AccessTimes(KEY* p_Key,ACCESS_TYPE opt);
 uint8_t Key_AccessState(KEY* p_Key,KEY_STATE *p_State);
+uint8_t Key_Scan(GPIO_TypeDef* GPIOx,uint16_t GPIO_Pin);
 #endif

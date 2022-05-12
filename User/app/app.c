@@ -152,13 +152,13 @@ void _cbBkWindow(WM_MESSAGE * pMsg)
 								/* Phone *******************************************************************/
 								case 0:	
 									Flag_ICON000 = 1;
-									FUN_ICON000Clicked();			
+									// FUN_ICON000Clicked();			
 									break;	
 								
 								/* Message ***********************************************************************/
 								case 1:
 									Flag_ICON001 = 1;
-									FUN_ICON001Clicked();
+									// FUN_ICON001Clicked();
 									break;
 								}	
 						 break;
@@ -230,32 +230,32 @@ void _cbMidWin(WM_MESSAGE * pMsg)
 							{								
 								/* KEY  ******************************************************************/
 								case 0:	
-									Flag_ICON100 = 1;
-									FUN_ICON100Clicked();			
+									Flag_ICON109 = 1;
+									FUN_ICON109Clicked();			
 									break;	
 								
 								/* Breathing ***********************************************************************/
 								case 1:
-									Flag_ICON101 = 1;
-									FUN_ICON101Clicked();
+									Flag_ICON109 = 1;
+									FUN_ICON109Clicked();
 									break;
 								
 								/* ADC *********************************************************************/
 								case 2:
-									Flag_ICON102 = 1;
-									FUN_ICON102Clicked();	
+									Flag_ICON109 = 1;
+									FUN_ICON109Clicked();	
 									break;
 								
 								/* 飞机大战 ********************************************************************/
 								case 3:
-									Flag_ICON103 = 1;
+									Flag_ICON109 = 1;
 									WM_HideWindow(WinPara.hWinMid);
 									WM_HideWindow(MIDWIN);
 									WM_HideWindow(hText);
 								  WM_HideWindow(iText);
 									WM_HideWindow(hFrameClose);
 									WM_HideWindow(BOTWIN);
-									FUN_ICON103Clicked();
+									FUN_ICON109Clicked();
 									break;
 								
 								/* Clock **********************************************************************/
@@ -266,41 +266,41 @@ void _cbMidWin(WM_MESSAGE * pMsg)
 								
 								/* Music ********************************************************************/
 								case 5:
-									Flag_ICON105 = 1;
-									FUN_ICON105Clicked();
+									Flag_ICON109 = 1;
+									FUN_ICON109Clicked();
 									break;
 								
 								/* Recorder ******************************************************************/
 								case 6:					
-									Flag_ICON106 = 1;
-									FUN_ICON106Clicked();
+									Flag_ICON109 = 1;
+									FUN_ICON109Clicked();
 									break;
 								
-								/* USB *******************************************************************/
+								/* Calendar *******************************************************************/
 								case 7:
 									Flag_ICON107 = 1;
 									FUN_ICON107Clicked();
 									break;
 								
-								/* Wifi ******************************************************************/
+								/* 照相机 ******************************************************************/
 								case 8:
 									Flag_ICON108 = 1;
 									FUN_ICON108Clicked();
 									break;
 								 
-								 /* Humiture ******************************************************************/
+								 /* Calculator ******************************************************************/
 								case 9:
 									Flag_ICON109 = 1;
 									FUN_ICON109Clicked();
 									break;
 								 
-								 /* Camera ******************************************************************/
+								 /* Caculator ******************************************************************/
 								case 10:
-									Flag_ICON110 = 1;
-									FUN_ICON110Clicked();
+									Flag_ICON109 = 1;
+									FUN_ICON109Clicked();
 									break;
 								 
-								/* 贪吃蛇*****************************************************************/
+								/* Snake*****************************************************************/
 								case 11:
 									Flag_ICON111 = 1;
 									WM_HideWindow(WinPara.hWinMid);

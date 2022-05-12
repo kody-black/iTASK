@@ -16,14 +16,30 @@
   */ 
 #include "..\User\bsp\lcd\bsp_ili9341_lcd.h"
 
+
+
+
+
+
 /**
   * @brief  向ILI9341写入命令
   * @param  usCmd :要写入的命令（表寄存器地址）
   * @retval 无
   */	
-static __inline void ILI9341_Write_Cmd ( uint16_t usCmd )
+void ILI9341_Write_Cmd ( uint16_t usCmd )
 {
 	* ( __IO uint16_t * ) ( macFSMC_Addr_ILI9341_CMD ) = usCmd;
+	
+}
+
+/**
+  * @brief  从ILI9341读取数据
+  * @param  无
+  * @retval 读取到的数据
+  */	
+ uint16_t ILI9341_Read_Data ( void )
+{
+	return ( * ( __IO uint16_t * ) ( macFSMC_Addr_ILI9341_DATA ) );
 	
 }
 
@@ -32,7 +48,7 @@ static __inline void ILI9341_Write_Cmd ( uint16_t usCmd )
   * @param  usData :要写入的数据
   * @retval 无
   */	
-static __inline void ILI9341_Write_Data ( uint16_t usData )
+void ILI9341_Write_Data ( uint16_t usData )
 {
 	* ( __IO uint16_t * ) ( macFSMC_Addr_ILI9341_DATA ) = usData;
 	
@@ -49,6 +65,50 @@ static void ILI9341_Delay ( __IO uint32_t nCount )
   for ( ; nCount != 0; nCount -- );
 	
 }
+
+
+/**
+ * @brief  读取ILI9341 GRAN 的一个像素数据
+ * @param  无
+ * @retval 像素数据
+ */
+static uint16_t ILI9341_Read_PixelData ( void )	
+{	
+	uint16_t usR=0, usG=0, usB=0 ;
+
+	
+	ILI9341_Write_Cmd ( 0x2E );   /* 读数据 */
+	
+	usR = ILI9341_Read_Data (); 	/*FIRST READ OUT DUMMY DATA*/
+	
+	usR = ILI9341_Read_Data ();  	/*READ OUT RED DATA  */
+	usB = ILI9341_Read_Data ();  	/*READ OUT BLUE DATA*/
+	usG = ILI9341_Read_Data ();  	/*READ OUT GREEN DATA*/	
+	
+  return ( ( ( usR >> 11 ) << 11 ) | ( ( usG >> 10 ) << 5 ) | ( usB >> 11 ) );
+	
+}
+
+
+/**
+ * @brief  获取 ILI9341 显示器上某一个坐标点的像素数据
+ * @param  usX ：在特定扫描方向下该点的X坐标
+ * @param  usY ：在特定扫描方向下该点的Y坐标
+ * @retval 像素数据
+ */
+uint16_t ILI9341_GetPointPixel ( uint16_t usX, uint16_t usY )
+{ 
+	uint16_t usPixelData;
+
+	
+	ILI9341_SetCursor ( usX, usY );
+	
+	usPixelData = ILI9341_Read_PixelData ();
+	
+	return usPixelData;
+	
+}
+
 
 
 /**
@@ -364,13 +424,53 @@ void ILI9341_Init ( void )
 /**
  * @brief  设置ILI9341的GRAM的扫描方向 
  * @param  ucOption ：选择GRAM的扫描方向 
-  *   该参数为以下值之一：
-  *     @arg 1 :左上角->右下角
-  *     @arg 2 :左下角->右上角
-  *     @arg 3 :右下角->左上角
-  *     @arg 4 :右上角->左下角
+ *     @arg 0-7 :参数可选值为0-7这八个方向
+ *
+ *	！！！其中0、3、5、6 模式适合从左至右显示文字，
+ *				不推荐使用其它模式显示文字	其它模式显示文字会有镜像效果			
+ *		
+ *	其中0、2、4、6 模式的X方向像素为240，Y方向像素为320
+ *	其中1、3、5、7 模式下X方向像素为320，Y方向像素为240
+ *
+ *	其中 6 模式为大部分液晶例程的默认显示方向
+ *	其中 3 模式为摄像头例程使用的方向
+ *	其中 0 模式为BMP图片显示例程使用的方向
+ *
  * @retval 无
- */
+ * @note  坐标图例：A表示向上，V表示向下，<表示向左，>表示向右
+					X表示X轴，Y表示Y轴
+
+------------------------------------------------------------
+模式0：				.		模式1：		.	模式2：			.	模式3：					
+					A		.					A		.		A					.		A									
+					|		.					|		.		|					.		|							
+					Y		.					X		.		Y					.		X					
+					0		.					1		.		2					.		3					
+	<--- X0 o		.	<----Y1	o		.		o 2X--->  .		o 3Y--->	
+------------------------------------------------------------	
+模式4：				.	模式5：			.	模式6：			.	模式7：					
+	<--- X4 o		.	<--- Y5 o		.		o 6X--->  .		o 7Y--->	
+					4		.					5		.		6					.		7	
+					Y		.					X		.		Y					.		X						
+					|		.					|		.		|					.		|							
+					V		.					V		.		V					.		V		
+---------------------------------------------------------				
+											 LCD屏示例
+								|-----------------|
+								|			野火Logo		|
+								|									|
+								|									|
+								|									|
+								|									|
+								|									|
+								|									|
+								|									|
+								|									|
+								|-----------------|
+								屏幕正面（宽240，高320）
+
+ *******************************************************/
+
 void ILI9341_GramScan ( uint8_t ucOption )
 {	
 	switch ( ucOption )
@@ -416,5 +516,56 @@ void ILI9341_GramScan ( uint8_t ucOption )
 	}
 
 }
+
+// 注：下面是更根据LCD编写的原生API，为了兼容性而保留，可以使用emWin上的相应函数替代
+
+/**
+ * @brief  在ILI9341显示器上开辟一个窗口
+ * @param  usX ：在特定扫描方向下窗口的起点X坐标
+ * @param  usY ：在特定扫描方向下窗口的起点Y坐标
+ * @param  usWidth ：窗口的宽度
+ * @param  usHeight ：窗口的高度
+ * @retval 无
+ */
+void ILI9341_OpenWindow ( uint16_t usX, uint16_t usY, uint16_t usWidth, uint16_t usHeight )
+{	
+	ILI9341_Write_Cmd ( CMD_SetCoordinateX ); 				 /* 设置X坐标 */
+	ILI9341_Write_Data ( usX >> 8  );	 /* 先高8位，然后低8位 */
+	ILI9341_Write_Data ( usX & 0xff  );	 /* 设置起始点和结束点*/
+	ILI9341_Write_Data ( ( usX + usWidth - 1 ) >> 8  );
+	ILI9341_Write_Data ( ( usX + usWidth - 1 ) & 0xff  );
+
+	ILI9341_Write_Cmd ( CMD_SetCoordinateY ); 			     /* 设置Y坐标*/
+	ILI9341_Write_Data ( usY >> 8  );
+	ILI9341_Write_Data ( usY & 0xff  );
+	ILI9341_Write_Data ( ( usY + usHeight - 1 ) >> 8 );
+	ILI9341_Write_Data ( ( usY + usHeight - 1) & 0xff );
+	
+}
+
+
+/**
+ * @brief  设定ILI9341的光标坐标
+ * @param  usX ：在特定扫描方向下光标的X坐标
+ * @param  usY ：在特定扫描方向下光标的Y坐标
+ * @retval 无
+ */
+static void ILI9341_SetCursor ( uint16_t usX, uint16_t usY )	
+{
+	ILI9341_OpenWindow ( usX, usY, 1, 1 );
+}
+
+
+/**
+ * @brief  在ILI9341显示器上以某一颜色填充像素点
+ * @param  ulAmout_Point ：要填充颜色的像素点的总数目
+ * @param  usColor ：颜色
+ * @retval 无
+ */
+
+
+
+/*********************end of file*************************/
+
 
 

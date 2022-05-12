@@ -51,6 +51,8 @@
 #include  "app.h"
 #include  "..\User\bsp\lcd\bsp_ili9341_lcd.h"
 #include  "..\User\bsp\ESP8266\bsp_esp8266.h"
+#include ".\bmp\bsp_bmp.h"
+
 // USER END
 
 /*********************************************************************
@@ -72,6 +74,10 @@
 
 // USER START (Optionally insert additional static data)
 extern uint8_t Ov7725_vsync;
+extern OV7725_MODE_PARAM cam_mode; // 选择OV7725的采样模式
+
+extern FATFS* fs;													/* FatFs文件系统对象 */
+extern FRESULT result;                /* 文件系统操作结果 */
 // USER END
 
 /*********************************************************************
@@ -90,6 +96,7 @@ extern uint8_t Ov7725_vsync;
 *
 **********************************************************************
 */
+/* 本回调函数负责光照模式的改变以及特殊模式的切换*/
 void cbCameraWin(WM_MESSAGE * pMsg)
 {
 	switch (pMsg->MsgId) 
@@ -117,8 +124,8 @@ void FUN_ICON108Clicked(void)
 {
 	WM_HWIN hWin;
 	OS_ERR     err;
-	uint32_t i=0;
-	uint16_t Camera_Data;
+	// uint32_t i=0;
+	// uint16_t Camera_Data;
 	uint8_t count=0;
 	
 	ESP8266_stop();
@@ -147,27 +154,104 @@ void FUN_ICON108Clicked(void)
 			GUI_Delay(10);
 		}
 	}
+	/*按键初始化*/
+	Key1_GPIO_Config();
+	
+	/*LED提示灯初始化*/
+	LED_GPIO_Config();
+	
+	/*挂载SD卡的文件系统*/
+	printf("0-0\n");
+	result=f_mount(fs,"0:",1);	
+	printf("0-1\n");	
+	
+	if(result != FR_OK)
+	{
+		printf("\r\nSD-CARD FILE SYSTEM ERROR!\r\n");
+	}
+	
 	
 	/* ov7725 场信号线初始化 */
 	VSYNC_Init();
 	Ov7725_vsync = 0;
 	ILI9341_GramScan(2);
 	bsp_DelayUS(10);
-	while(Flag_ICON108)
+	
+	/*设置OV7725的采样模式*/
+	OV7725_Special_Effect(cam_mode.effect);
+	/*亮度模式*/
+	OV7725_Light_Mode(cam_mode.light_mode);
+	/*饱和度*/
+	OV7725_Color_Saturation(cam_mode.saturation);
+	/*亮度*/
+	OV7725_Brightness(cam_mode.brightness);
+	/*对比度*/
+	OV7725_Contrast(cam_mode.contrast);
+	/*模式调节*/
+	OV7725_Special_Effect(cam_mode.effect);
+	
+	/*采样大小设置*/
+	OV7725_Window_Set(cam_mode.cam_sx,
+														cam_mode.cam_sy,
+														cam_mode.cam_width,
+														cam_mode.cam_height,
+														cam_mode.QVGA_VGA);
+	
+	
+	
+	/* 设置液晶的扫描方式（注意横竖的扫描方式参数不同）*/
+	ILI9341_GramScan( cam_mode.lcd_scan );
+	
+	while(1)
 	{
+		printf("1");
 		if( Ov7725_vsync == 2 )
 		{			
+			printf("2");
 			OSSchedLock(&err);			
 			FIFO_PREPARE;  			/*FIFO准备*/
 			/*采集并显示*/
-			for(i = 0; i < 240*320; i++)
-			{
-				READ_FIFO_PIXEL(Camera_Data);		/* 从FIFO读出一个rgb565像素到Camera_Data变量 */
-				macFSMC_ILI9341_RAM=Camera_Data;
-			}
+			
+			ImagDisp(cam_mode.lcd_sx,
+								cam_mode.lcd_sy,
+								cam_mode.cam_width,
+								cam_mode.cam_height);	
+			
 			OSSchedUnlock(&err);
 			Ov7725_vsync = 0;						
 		}
+		
+		/*拍照*/
+		/*Key1拍照模式*/
+	  if( Key_Scan(KEY1_PORT,KEY1_PIN) == KEY_ON  )
+		{		
+			static uint8_t name_count = 0;
+			char name[40];
+			
+			
+			name_count++; 
+			sprintf(name,"0:photo_%d.bmp",name_count);
+
+			LED_BLUE;
+			printf("\r\nCapturing the picture...");
+		
+			ILI9341_GramScan ( cam_mode.lcd_scan );			
+			
+			if(Screen_Shot(0,0,240,320,name) == 0)
+			{
+				printf("\r\nSave successfully!");
+				LED_GREEN;
+			}
+			else
+			{
+				printf("\r\n save failed!");
+				LED_RED;
+			}
+		}
+		
+		/*触屏拍照模式*/
+		
+		
 		if(tpad_flag)WM_DeleteWindow(hWin);
 		GUI_Delay(1);//WM_Exec();//
 	}

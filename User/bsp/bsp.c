@@ -385,9 +385,11 @@ void BSP_Init(void)
 	
 	/* Register work area for each volume (Always succeeds regardless of disk status) */
 	result=f_mount(fs,"0:",1);	
+	printf("mount function is over!\n");
 	//printf("mount_res:%d\n",result);
 	if(result!=FR_OK)
 	{
+			printf("Mount Failed!");
 			IsCal=0xE0;
 			return;
 	}

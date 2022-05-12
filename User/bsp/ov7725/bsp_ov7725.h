@@ -3,6 +3,34 @@
 	   
 #include "stm32f10x.h"
 
+/*摄像头配置结构体*/
+typedef struct
+{	
+
+	
+	uint8_t QVGA_VGA; //0：QVGA，1VGA
+	
+	/*VGA:sx + width <= 320 或 240 ,sy+height <= 320 或 240*/
+	/*QVGA:sx + width <= 320 ,sy+height <= 240*/
+	uint16_t cam_sx; //摄像头窗口X起始位置
+	uint16_t cam_sy; //摄像头窗口Y起始位置
+	
+	uint16_t cam_width;//图像分辨率，宽
+	uint16_t cam_height;//图像分辨率，高
+	
+	uint16_t lcd_sx;//图像显示在液晶屏的X起始位置
+	uint16_t lcd_sy;//图像显示在液晶屏的Y起始位置
+	uint8_t lcd_scan;//液晶屏的扫描模式（0-7）
+	
+	uint8_t light_mode;//光照模式，参数范围[0~5]
+	int8_t saturation;//饱和度,参数范围[-4 ~ +4]   
+	int8_t brightness;//光照度，参数范围[-4~+4]
+	int8_t contrast;//对比度，参数范围[-4~+4]
+	uint8_t effect;	//特殊效果，参数范围[0~6]:	
+
+
+}OV7725_MODE_PARAM;
+
 
 /* 寄存器宏定义 */
 #define GAIN      0x00
@@ -253,4 +281,12 @@ void Ov7725_GPIO_Config(void);
 ErrorStatus Ov7725_Init(void);
 void VSYNC_Init(void);
 void DisableCamera(void);
+void OV7725_Light_Mode(uint8_t mode);
+void OV7725_Color_Saturation(int8_t sat);
+void OV7725_Brightness(int8_t bri);
+void OV7725_Contrast(int8_t cnst);
+void OV7725_Special_Effect(uint8_t eff);
+void OV7725_Window_Set(uint16_t sx,uint16_t sy,uint16_t width,uint16_t height,uint8_t QVGA_VGA);
+void OV7725_Window_VGA_Set(uint16_t sx,uint16_t sy,uint16_t width,uint16_t height);
+void ImagDisp(uint16_t sx,uint16_t sy,uint16_t width,uint16_t height);																		
 #endif

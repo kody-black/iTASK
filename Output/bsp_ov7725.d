@@ -30,3 +30,4 @@
 ..\..\output\bsp_ov7725.o: ..\..\Libraries\FWlib\inc\stm32f10x_wwdg.h
 ..\..\output\bsp_ov7725.o: ..\..\Libraries\FWlib\inc\misc.h
 ..\..\output\bsp_ov7725.o: ..\..\User\..\User\bsp\ov7725\bsp_sccb.h
+..\..\output\bsp_ov7725.o: ..\..\User\bsp\ov7725\../lcd/bsp_ili9341_lcd.h

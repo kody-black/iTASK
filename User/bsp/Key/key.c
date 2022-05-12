@@ -324,3 +324,25 @@ uint8_t Key_AccessState(KEY* p_Key,KEY_STATE *p_State)
   //返回状态是否改变
   return StateChange;
 }
+
+/*
+ * 函数名：Key_Scan
+ * 描述  ：检测是否有按键按下(阻塞调用)
+ * 输入  ：GPIOx：x 可以是 A，B，C，D或者 E
+ *		     GPIO_Pin：待读取的端口位 	
+ * 输出  ：KEY_OFF(没按下按键)、KEY_ON（按下按键）
+ */
+uint8_t Key_Scan(GPIO_TypeDef* GPIOx,uint16_t GPIO_Pin)
+{			
+	/*检测是否有按键按下 */
+	if(GPIO_ReadInputDataBit(GPIOx,GPIO_Pin) == KEY_ON )  
+	{	 
+		/*等待按键释放 */
+		while(GPIO_ReadInputDataBit(GPIOx,GPIO_Pin) == KEY_ON);   
+		return 	KEY_ON;	 
+	}
+	else
+		return KEY_OFF;
+}
+/*********************************************END OF FILE**********************/
+

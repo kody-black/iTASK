@@ -3,7 +3,7 @@
 ..\..\output\diskio.o: ..\..\ff10\integer.h
 ..\..\output\diskio.o: ..\..\ff10\ff.h
 ..\..\output\diskio.o: ..\..\ff10\ffconf.h
-..\..\output\diskio.o: ..\..\ff10\..\User\bsp\spi_flash\fatfs_flash_spi.h
+..\..\output\diskio.o: ..\..\User\bsp\sdio\bsp_sdio_sdcard.h
 ..\..\output\diskio.o: ..\..\Libraries\CMSIS\stm32f10x.h
 ..\..\output\diskio.o: ..\..\Libraries\CMSIS\core_cm3.h
 ..\..\output\diskio.o: E:\flushbonading\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
@@ -33,4 +33,6 @@
 ..\..\output\diskio.o: ..\..\Libraries\FWlib\inc\stm32f10x_usart.h
 ..\..\output\diskio.o: ..\..\Libraries\FWlib\inc\stm32f10x_wwdg.h
 ..\..\output\diskio.o: ..\..\Libraries\FWlib\inc\misc.h
+..\..\output\diskio.o: E:\flushbonading\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+..\..\output\diskio.o: ..\..\ff10\..\User\bsp\spi_flash\fatfs_flash_spi.h
 ..\..\output\diskio.o: E:\flushbonading\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

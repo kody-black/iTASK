@@ -361,7 +361,7 @@
             <wLevel>0</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
-            <uC99>0</uC99>
+            <uC99>1</uC99>
             <useXO>0</useXO>
             <v6Lang>0</v6Lang>
             <v6LangP>0</v6LangP>
@@ -369,7 +369,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_HD, USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Libraries\CMSIS;..\..\User;..\..\Libraries\FWlib\inc;..\..\uCOS-III\uC-CPU;..\..\uCOS-III\uC-CPU\ARM-Cortex-M3\RealView;..\..\uCOS-III\uC-LIB;..\..\uCOS-III\uC-LIB\Ports\ARM-Cortex-M3\RealView;..\..\uCOS-III\uCOS-III\Source;..\..\uCOS-III\uCOS-III\Ports\ARM-Cortex-M3\Generic\RealView;..\..\User\app;..\..\STemWinLibrary522\Config;..\..\STemWinLibrary522\inc;..\..\ff10;..\..\ff10\option;..\..\User\os;..\..\Mass_Storage\inc;..\..\STM32_USB-FS-Device_Driver\inc</IncludePath>
+              <IncludePath>..\..\Libraries\CMSIS;..\..\User;..\..\Libraries\FWlib\inc;..\..\uCOS-III\uC-CPU;..\..\uCOS-III\uC-CPU\ARM-Cortex-M3\RealView;..\..\uCOS-III\uC-LIB;..\..\uCOS-III\uC-LIB\Ports\ARM-Cortex-M3\RealView;..\..\uCOS-III\uCOS-III\Source;..\..\uCOS-III\uCOS-III\Ports\ARM-Cortex-M3\Generic\RealView;..\..\User\app;..\..\STemWinLibrary522\Config;..\..\STemWinLibrary522\inc;..\..\ff10;..\..\ff10\option;..\..\User\os;..\..\Mass_Storage\inc;..\..\STM32_USB-FS-Device_Driver\inc;..\..\User\bsp\bmp;..\..\User\bsp\sdio;..\..\User\bsp</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -922,6 +922,16 @@
               <FileType>1</FileType>
               <FilePath>..\..\User\bsp\sim900a\sim900a.c</FilePath>
             </File>
+            <File>
+              <FileName>bsp_bmp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\bsp\bmp\bsp_bmp.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_sdio_sdcard.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\bsp\sdio\bsp_sdio_sdcard.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -998,16 +1008,6 @@
               <FilePath>..\..\User\common.c</FilePath>
             </File>
             <File>
-              <FileName>KEYapp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\app\KEYapp.c</FilePath>
-            </File>
-            <File>
-              <FileName>Breathingapp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\app\Breathingapp.c</FilePath>
-            </File>
-            <File>
               <FileName>pysearch.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\app\pysearch.c</FilePath>
@@ -1016,11 +1016,6 @@
               <FileName>keypadapp.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\app\keypadapp.c</FilePath>
-            </File>
-            <File>
-              <FileName>ADCapp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\app\ADCapp.c</FilePath>
             </File>
             <File>
               <FileName>EEPROMapp.c</FileName>
@@ -1033,19 +1028,9 @@
               <FilePath>..\..\User\app\Clockapp.c</FilePath>
             </File>
             <File>
-              <FileName>USBapp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\app\USBapp.c</FilePath>
-            </File>
-            <File>
               <FileName>Wifi.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\app\Wifi.c</FilePath>
-            </File>
-            <File>
-              <FileName>Humitureapp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\app\Humitureapp.c</FilePath>
             </File>
             <File>
               <FileName>Cameraapp.c</FileName>
@@ -1056,21 +1041,6 @@
               <FileName>Calculatorapp.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\app\Calculatorapp.c</FilePath>
-            </File>
-            <File>
-              <FileName>Phoneapp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\app\Phoneapp.c</FilePath>
-            </File>
-            <File>
-              <FileName>Messageapp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\app\Messageapp.c</FilePath>
-            </File>
-            <File>
-              <FileName>UserApp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\app\UserApp.c</FilePath>
             </File>
             <File>
               <FileName>bmAsteroid.c</FileName>
@@ -1116,6 +1086,11 @@
               <FileName>snake.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\app\snake.c</FilePath>
+            </File>
+            <File>
+              <FileName>Calendar.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\app\Calendar.c</FilePath>
             </File>
           </Files>
         </Group>

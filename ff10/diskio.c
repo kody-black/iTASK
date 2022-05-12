@@ -9,7 +9,8 @@
 
 #include "diskio.h"		/* FatFs lower layer API */
 #include "ff.h"
-
+#include "bsp_sdio_sdcard.h"
+#include <string.h>
 
 #ifndef FATFS_FLASH_SPI
 	#define FATFS_FLASH_SPI				1
@@ -27,7 +28,9 @@
 
 /* Definitions of physical drive number for each media */
 #define SPI_FLASH		0
-
+#define ATA			           1     // SD¿¨
+#define SD_BLOCKSIZE     512 
+extern  SD_CardInfo SDCardInfo;
 /*-----------------------------------------------------------------------*/
 /* Inidialize a Drive                                                    */
 /*-----------------------------------------------------------------------*/
@@ -44,6 +47,17 @@ DSTATUS disk_initialize (
 			FLASH_DEBUG("SPI FLASH init");
 			status = TM_FATFS_FLASH_SPI_disk_initialize();
 			#endif
+			break;
+		
+		case ATA:	         /* SD CARD */
+			if(SD_Init()==SD_OK)
+			{
+				status &= ~STA_NOINIT;
+			}
+			else 
+			{
+				status = STA_NOINIT;
+			}
 			break;
 
 		default:
@@ -72,7 +86,11 @@ DSTATUS disk_status (
 			status = TM_FATFS_FLASH_SPI_disk_status();	/* SDIO communication */
 			#endif
 			break;
-
+		
+		case ATA:	/* SD CARD */
+			status &= ~STA_NOINIT;
+			break;
+		
 		default:
 			status = STA_NOINIT;
 	}
@@ -94,12 +112,49 @@ DRESULT disk_read (
 )
 {
 	DRESULT status = RES_PARERR;
+	SD_Error SD_state = SD_OK;
+	
 	switch (pdrv) {
 		case SPI_FLASH:
 					#if	FATFS_FLASH_SPI ==1
 					status = TM_FATFS_FLASH_SPI_disk_read(buff, sector, count);	/* SDIO communication */
 					#endif
 		break;
+		
+		case ATA:	/* SD CARD */						
+		  if((DWORD)buff&3)
+			{
+				DRESULT res = RES_OK;
+				DWORD scratch[SD_BLOCKSIZE / 4];
+
+				while (count--) 
+				{
+					res = disk_read(ATA,(void *)scratch, sector++, 1);
+
+					if (res != RES_OK) 
+					{
+						break;
+					}
+					memcpy(buff, scratch, SD_BLOCKSIZE);
+					buff += SD_BLOCKSIZE;
+		    }
+		    return res;
+			}
+			
+			SD_state=SD_ReadMultiBlocks(buff,(uint64_t)sector*SD_BLOCKSIZE,SD_BLOCKSIZE,count);
+		  if(SD_state==SD_OK)
+			{
+				/* Check if the Transfer is finished */
+				SD_state=SD_WaitReadOperation();
+				while(SD_GetStatus() != SD_TRANSFER_OK);
+			}
+			if(SD_state!=SD_OK)
+				status = RES_PARERR;
+		  else
+			  status = RES_OK;	
+			break;   
+		
+		
 		default:
 			status = RES_PARERR;
 	}
@@ -122,6 +177,8 @@ DRESULT disk_write (
 )
 {
 	DRESULT status = RES_PARERR;
+	SD_Error SD_state = SD_OK;
+	
 	if (!count) {
 		return RES_PARERR;		/* Check parameter */
 	}
@@ -132,6 +189,42 @@ DRESULT disk_write (
 					status = TM_FATFS_FLASH_SPI_disk_write((BYTE *)buff, sector, count);	/* SDIO communication */
 					#endif
 		break;
+		
+		case ATA:	/* SD CARD */  
+			if((DWORD)buff&3)
+			{
+				DRESULT res = RES_OK;
+				DWORD scratch[SD_BLOCKSIZE / 4];
+
+				while (count--) 
+				{
+					memcpy( scratch,buff,SD_BLOCKSIZE);
+					res = disk_write(ATA,(void *)scratch, sector++, 1);
+					if (res != RES_OK) 
+					{
+						break;
+					}					
+					buff += SD_BLOCKSIZE;
+		    }
+		    return res;
+			}		
+		
+			SD_state=SD_WriteMultiBlocks((uint8_t *)buff,(uint64_t)sector*SD_BLOCKSIZE,SD_BLOCKSIZE,count);
+			if(SD_state==SD_OK)
+			{
+				/* Check if the Transfer is finished */
+				SD_state=SD_WaitWriteOperation();
+
+				/* Wait until end of DMA transfer */
+				while(SD_GetStatus() != SD_TRANSFER_OK);			
+			}
+			if(SD_state!=SD_OK)
+				status = RES_PARERR;
+		  else
+			  status = RES_OK;	
+		break;
+		
+		
 		default:
 			status = RES_PARERR;
 	}
@@ -159,6 +252,29 @@ DRESULT disk_ioctl (
 					status = TM_FATFS_FLASH_SPI_disk_ioctl(cmd, buff);	/* SDIO communication */
 					#endif
 		break;
+		
+		case ATA:	/* SD CARD */
+			switch (cmd) 
+			{
+				// Get R/W sector size (WORD) 
+				case GET_SECTOR_SIZE :    
+					*(WORD * )buff = SD_BLOCKSIZE;
+				break;
+				// Get erase block size in unit of sector (DWORD)
+				case GET_BLOCK_SIZE :      
+					*(DWORD * )buff = 1;
+				break;
+
+				case GET_SECTOR_COUNT:
+					*(DWORD * )buff = SDCardInfo.CardCapacity/SDCardInfo.CardBlockSize;
+					break;
+				case CTRL_SYNC :
+				break;
+			}
+			status = RES_OK;
+			break;
+		
+		
 		default:
 			status = RES_PARERR;
 	}

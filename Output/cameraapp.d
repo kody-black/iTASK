@@ -123,3 +123,5 @@
 ..\..\output\cameraapp.o: ..\..\STemWinLibrary522\inc\MESSAGEBOX.h
 ..\..\output\cameraapp.o: ..\..\User\..\User\bsp\ESP8266\bsp_esp8266.h
 ..\..\output\cameraapp.o: E:\flushbonading\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+..\..\output\cameraapp.o: ..\..\User\bsp\.\bmp\bsp_bmp.h
+..\..\output\cameraapp.o: E:\flushbonading\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

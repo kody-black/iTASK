@@ -55,6 +55,55 @@
 #define LED3_OFF		digitalHi(macLED2_GPIO_PORT,macLED3_GPIO_PIN)
 #define LED3_ON			digitalLo(macLED2_GPIO_PORT,macLED3_GPIO_PIN)
 
+/*²Ù×÷ÌáÊ¾µÆÅäÖÃ*/
+//ºì
+#define LED_RED  \
+					LED1_ON;\
+					LED2_OFF\
+					LED3_OFF
+
+//ÂÌ
+#define LED_GREEN		\
+					LED1_OFF;\
+					LED2_ON\
+					LED3_OFF
+
+//À¶
+#define LED_BLUE	\
+					LED1_OFF;\
+					LED2_OFF\
+					LED3_ON
+
+					
+//»Æ(ºì+ÂÌ)					
+#define LED_YELLOW	\
+					LED1_ON;\
+					LED2_ON\
+					LED3_OFF
+//×Ï(ºì+À¶)
+#define LED_PURPLE	\
+					LED1_ON;\
+					LED2_OFF\
+					LED3_ON
+
+//Çà(ÂÌ+À¶)
+#define LED_CYAN \
+					LED1_OFF;\
+					LED2_ON\
+					LED3_ON
+					
+//°×(ºì+ÂÌ+À¶)
+#define LED_WHITE	\
+					LED1_ON;\
+					LED2_ON\
+					LED3_ON
+					
+//ºÚ(È«²¿¹Ø±Õ)
+#define LED_RGBOFF	\
+					LED1_OFF;\
+					LED2_OFF\
+					LED3_OFF
+
 void LED_GPIO_Config(void);
 
 #endif /* __LED_H */
