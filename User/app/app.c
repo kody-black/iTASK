@@ -48,14 +48,6 @@ uint8_t Flag_ICON103  = 0;
 
 uint8_t Flag_ICON104  = 0;
 uint8_t Flag_ICON105  = 0;
-uint8_t Flag_ICON106  = 0;
-uint8_t Flag_ICON107  = 0;
-
-uint8_t Flag_ICON108  = 0;
-uint8_t Flag_ICON109  = 0;
-uint8_t Flag_ICON110  = 0;
-uint8_t Flag_ICON111  = 0;
-
 
 /* 用于桌面ICONVIEW图标的创建 */
 typedef struct {
@@ -82,40 +74,13 @@ static const BITMAP_ITEM _aBitmapItem0[] = {
 };
 /* 用于桌面ICONVIEW1图标的创建 */
 static const BITMAP_ITEM _aBitmapItem1[] = {
-  //{&bmkey,  	 	"KEY"		    },
-  //{&bmrgbled,	 	"Breathing"	}, 
-  //{&bmadc,  	 	"ADC"				},
-	
-  {&bmclock,    "Clock" 		},
-	{&bmclendar,    "Calendar" 		},
-	//{&bmusb,  	  "USB"		    },
-	//{&bmwifi,			"Wifi"		  },	
-	//{&bmWeather,  "Humiture"  }, 
-	
-  {&bmcamera,   "Camera"		}, 
-  {&bmcalculator,"Calculator"},
-	//{&bmAPP1,    	"UserApp" 	},	
-	{&bmfly,   "FlyWar" 		},
-	{&bmsnake,    	"Snake" 	}	
+  {&bmclock,      "Clock" 		},
+  {&bmclendar,    "Calendar" 	},
+  {&bmcamera,     "Camera"		}, 
+  {&bmcalculator, "Calculator"  },
+  {&bmfly,  	  "FlyWar" 	  	},
+  {&bmsnake,      "Snake" 		}	
 };
-
-//void FUN_ICON000Clicked(void)  {printf("FUN_ICON000Clicked\n");}
-//void FUN_ICON001Clicked(void)  {printf("FUN_ICON001Clicked\n");}
-
-//void FUN_ICON100Clicked(void)  {printf("FUN_ICON100Clicked\n");}
-//void FUN_ICON101Clicked(void)  {printf("FUN_ICON101Clicked\n");}
-//void FUN_ICON102Clicked(void)  {printf("FUN_ICON102Clicked\n");}
-//void FUN_ICON103Clicked(void)  {printf("FUN_ICON103Clicked\n");}
-
-//void FUN_ICON104Clicked(void)  {printf("FUN_ICON104Clicked\n");}
-//void FUN_ICON105Clicked(void)  {printf("FUN_ICON105Clicked\n");}
-//void FUN_ICON106Clicked(void)  {printf("FUN_ICON106Clicked\n");}
-//void FUN_ICON107Clicked(void)  {printf("FUN_ICON107Clicked\n");}
-
-//void FUN_ICON108Clicked(void)  {printf("FUN_ICON108Clicked\n");}
-//void FUN_ICON109Clicked(void)  {printf("FUN_ICON109Clicked\n");}
-//void FUN_ICON110Clicked(void)  {printf("FUN_ICON110Clicked\n");}
-//void FUN_ICON111Clicked(void)  {printf("FUN_ICON111Clicked\n");}
 
 
 /*
@@ -229,96 +194,55 @@ void _cbMidWin(WM_MESSAGE * pMsg)
 							/* 打开相应选项 */
 							switch(ICONVIEW_GetSel(pMsg->hWinSrc))
 							{								
-								/* clock  ******************************************************************/
+								/* clock  *************************/
 								case 0:	
 									Flag_ICON100 = 1;
 									FUN_ICON100Clicked();			
 									break;	
 								
-								/* secedule ***********************************************************************/
+								/* secedule ***********************/
 								case 1:
 									Flag_ICON101 = 1;
 									FUN_ICON101Clicked();
 									break;
 								
-								/* Camera *********************************************************************/
+								/* Camera **************************/
 								case 2:
 									Flag_ICON102 = 1;
 									FUN_ICON102Clicked();	
 									break;
 								
-								/* Calculator ********************************************************************/
+								/* Calculator **********************/
 								case 3:
 									Flag_ICON103 = 1;
 									FUN_ICON103Clicked();	
 									break;
 									
 								
-								/* Fly War **********************************************************************/
+								/* Fly War *************************/
 								case 4:
 									Flag_ICON104 = 1;
 									WM_HideWindow(WinPara.hWinMid);
 									WM_HideWindow(MIDWIN);
 									WM_HideWindow(hText);
-								  WM_HideWindow(iText);
+								    WM_HideWindow(iText);
 									WM_HideWindow(hFrameClose);
 									WM_HideWindow(BOTWIN);
 									FUN_ICON104Clicked();
 									break;
 								
-								/* snake ********************************************************************/
+								/* snake ****************************/
 								case 5:
 									Flag_ICON105 = 1;
 									WM_HideWindow(WinPara.hWinMid);
 									WM_HideWindow(MIDWIN);
 									WM_HideWindow(hText);
-								  WM_HideWindow(iText);
+								    WM_HideWindow(iText);
 									WM_HideWindow(hFrameClose);
 									WM_HideWindow(BOTWIN);
 									FUN_ICON105Clicked();
 									break;
 								
-								// /* Recorder ******************************************************************/
-								// case 6:					
-								// 	Flag_ICON106 = 1;
-								// 	FUN_ICON106Clicked();
-								// 	break;
-								
-								// /* Calendar *******************************************************************/
-								// case 7:
-								// 	Flag_ICON107 = 1;
-								// 	FUN_ICON107Clicked();
-								// 	break;
-								
-								// /* 照相机 ******************************************************************/
-								// case 8:
-								// 	Flag_ICON108 = 1;
-								// 	FUN_ICON108Clicked();
-								// 	break;
-								 
-								//  /* Calculator ******************************************************************/
-								// case 9:
-								// 	Flag_ICON109 = 1;
-								// 	FUN_ICON109Clicked();
-								// 	break;
-								 
-								//  /* Caculator ******************************************************************/
-								// case 10:
-								// 	Flag_ICON109 = 1;
-								// 	FUN_ICON110Clicked();
-								// 	break;
-								 
-								// /* Snake*****************************************************************/
-								// case 11:
-								// 	Flag_ICON111 = 1;
-								// 	WM_HideWindow(WinPara.hWinMid);
-								// 	WM_HideWindow(MIDWIN);
-								// 	WM_HideWindow(hText);
-								//   WM_HideWindow(iText);
-								// 	WM_HideWindow(hFrameClose);
-								// 	WM_HideWindow(BOTWIN);
-								// 	FUN_ICON111Clicked();
-								// 	break;
 								default:break;
 								}
 							 break;
@@ -347,8 +271,8 @@ void _cbMidWin(WM_MESSAGE * pMsg)
   */
 static void CreateTopWin(void)
 {
-	/* 顶部的 "wildfire OS "文本 */
-	hText = TEXT_CreateEx(0, 2, 60 , 16, WM_HBKWIN, WM_CF_SHOW, GUI_TA_LEFT|TEXT_CF_VCENTER, GUI_ID_TEXT0, "Wildfire OS");
+	/* 顶部的 "iTask"文本 */
+	hText = TEXT_CreateEx(0, 2, 60 , 16, WM_HBKWIN, WM_CF_SHOW, GUI_TA_LEFT|TEXT_CF_VCENTER, GUI_ID_TEXT0, "iTask");
 	TEXT_SetFont(hText, GUI_FONT_10_ASCII);
 	TEXT_SetTextColor(hText,TEXT_COLOR);
 	
@@ -405,8 +329,7 @@ static void CreateMidWin(void)
 		/* 设置图标在x 或y 方向上的间距。*/
 		ICONVIEW_SetSpace(MIDWIN, GUI_COORD_X, ICONVIEW_XSpace);
 		ICONVIEW_SetSpace(MIDWIN, GUI_COORD_Y, ICONVIEW_YSpace);
-	//	ICONVIEW_SetSpace(hWin, GUI_COORD_Y, ICONVIEW_YSpace);
-		/* 设置对齐方式 在5.22版本中最新加入的 */
+		/* 设置对齐方式  */
 		ICONVIEW_SetIconAlign(MIDWIN, ICONVIEW_IA_HCENTER|ICONVIEW_IA_TOP);
 }
 

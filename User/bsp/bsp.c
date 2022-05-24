@@ -396,14 +396,9 @@ void BSP_Init(void)
 	
 	/*************** 读取触摸屏校准参数  **************************/
 	SPI_FLASH_BufferRead(&IsCal,CALADD, 1);
-	//printf("cal:%X\n",IsCal);
 	if(IsCal==0x55)
 	{
 		SPI_FLASH_BufferRead((void *)readCal,CALADD+2, sizeof(readCal));
-//		printf("emWin_Touch_Calibration:\n");
-//		printf("XPos1:%2d-->%4d && XPos2:%3d-->%4d\n",readCal[0], readCal[6], readCal[4], readCal[2]);
-//		printf("YPos1:%2d-->%4d && YPos2:%3d-->%4d\n",readCal[1], readCal[7], readCal[5], readCal[3]);
-		/* Use the physical values to calibrate the touch screen */
 		GUI_TOUCH_Calibrate(GUI_COORD_X,readCal[0], readCal[4], readCal[6], readCal[2]); /* Calibrate X-axis */
 		GUI_TOUCH_Calibrate(GUI_COORD_Y,readCal[1], readCal[5], readCal[7], readCal[3]); /* Calibrate Y-axis */
 	}
@@ -412,7 +407,6 @@ void BSP_Init(void)
 	RTC_NVIC_Config();
 	rtc_flag=RTC_CheckAndConfig(&systmtime);
 	/************************************************************/
-	
 }
 /*
 *********************************************************************************************************
