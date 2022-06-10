@@ -6,12 +6,19 @@
 itask:
 
 │  README.md
+
 │  应用软件课程设计.pptx
+
 │  测试文档.docx
+
 │  设计文档.docx
+
 │  部署文档.docx
+
 │  需求文档.docx
+
 │
+
 └─源代码
 
 ### 项目总结
